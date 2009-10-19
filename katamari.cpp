@@ -37,15 +37,37 @@ void myReshape(int w, int h) {
 }
 
 void display(void) {
+	GLdouble xyCameraRadius;
+	GLdouble camera_height;
+	GLdouble camera_distance = 4.0;
+	GLdouble camera_angle = 30.0;
+	GLdouble camera_height_angle = 30.0;
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//camera stuff
+	xyCameraRadius = cos(camera_height_angle * M_PI/180) * camera_distance;
+	camera_height = ball.center[2] + sin(camera_height_angle * M_PI/180) * camera_distance;
+
+	// camera stuff
 	glLoadIdentity();
-	gluLookAt(0.0, 0.0, 1.0, ball.center[0], ball.center[1], ball.center[2], 0.0, 0.0, 1.0);
+	gluLookAt(ball.center[0] + sin(camera_angle * M_PI/180) * xyCameraRadius, ball.center[1] - cos(camera_angle * M_PI/180) * xyCameraRadius, camera_height, ball.center[0], ball.center[1], ball.center[2], 0.0, 0.0, 1.0);
+//	gluLookAt(ball.center[0], -2.0, camera_height, ball.center[0], ball.center[1], ball.center[2], 0.0, 0.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(40.0, 1.0, 0.0, 100.0);
+//	gluPerspective(<#GLdouble fovy#>, <#GLdouble aspect#>, <#GLdouble zNear#>, <#GLdouble zFar#>)
+	gluPerspective(60.0, 1.0, 0.5, 100.0);
 	glMatrixMode(GL_MODELVIEW);
+
+	// draw the floor
+	glColor3fv(WHITE_RGB);
+	glBegin(GL_QUADS);
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glVertex3f(-50.0f, -50.0f, 0.0f);
+	glVertex3f(50.0f, -50.0f, 0.0f);
+	glVertex3f(50.0f, 50.0f, 0.0f);
+	glVertex3f(-50.0f, 50.0f, 0.0f);
+	glEnd();
+
 
 	ball.draw();
 
@@ -154,15 +176,15 @@ int main(int argc, char** argv)
 //	glRotatef(60, 1.0, 0.0, 0.0);
 //	glRotatef(-20, 0.0, 0.0, 1.0);
 
-	glClearColor(0.3, 0.3, 0.3, 0.0);
+//	glClearColor(0.3, 0.3, 0.3, 0.0);
 
 
 	glEnable(GL_DEPTH_TEST);
 
 	//setup lighting
-	GLfloat globalambient[] = {0.3,0.3,0.3,1.0};
-	GLfloat sun_direction[] = {-1.0, -1.0, 2.0, 1.0};
-	GLfloat sun_intensity[] = {0.7, 0.7, 0.7, 1.0};
+	GLfloat globalambient[] = {0.5,0.5,0.5,1.0};
+	GLfloat sun_direction[] = {5.0, -5.0, 5.0, 0.0};
+	GLfloat sun_intensity[] = {0.8, 0.8, 0.8, 1.0};
 	glEnable(GL_LIGHTING);
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalambient);
 	glEnable(GL_LIGHT0);

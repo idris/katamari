@@ -45,57 +45,62 @@ void Ball::reset() {
 }
 
 void Ball::draw() {
-	glColor3fv(RED_RGB);
+	glPushMatrix();
+//	glTranslatef(-0.5, -0.5, -0.5);
+//	glRotatef(90.0f, -1.0f, 0.0f, 0.0f);
+//	glTranslatef(0.5, 0.5, 0.5);
+
+	// front
+	glColor3fv(BLUE_RGB);
 	glBegin(GL_QUADS);
-	glNormal3f(0.0f, 1.0f, 0.0f);
+	glNormal3f(0.0f, -1.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(1.0f, 0.0f, 1.0f);
 	glVertex3f(0.0f, 0.0f, 1.0f);
 	glEnd();
 
-
-	glColor3fv(BLUE_RGB);
+	// left
+//	glColor3fv(BLUE_RGB);
 	glBegin(GL_QUADS);
-	glNormal3f(1.0f, 0.0f, 0.0f);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, 1.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(0.0f, 1.0f, 1.0f);
 	glEnd();
 
-
-	glColor3fv(GREEN_RGB);
+	// right
+//	glColor3fv(BLUE_RGB);
 	glBegin(GL_QUADS);
-	glNormal3f(0.0f, 0.0f, -1.0f);
+	glNormal3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(1.0f, 1.0f, 0.0f);
+	glVertex3f(1.0f, 1.0f, 1.0f);
+	glVertex3f(1.0f, 0.0f, 1.0f);
+	glEnd();
+
+	// top
+//	glColor3fv(GREEN_RGB);
+	glBegin(GL_QUADS);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(1.0f, 0.0f, 1.0f);
 	glVertex3f(1.0f, 1.0f, 1.0f);
 	glVertex3f(0.0f, 1.0f, 1.0f);
 	glEnd();
 
-	
-//	int i;
-//
-//	for (i = 0; i < 6; i++) {
-//		glBegin(GL_QUADS);
-//		glNormal3fv(&n[i][0]);
-//		glVertex3fv(&v[faces[i][0]][0]);
-//		glVertex3fv(&v[faces[i][1]][0]);
-//		glVertex3fv(&v[faces[i][2]][0]);
-//		glVertex3fv(&v[faces[i][3]][0]);
-//		glEnd();
-//	}
+	// bottom
+//	glColor3fv(GREEN_RGB);
+	glBegin(GL_QUADS);
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(1.0f, 1.0f, 0.0f);
+	glVertex3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
+	glEnd();
 
-//	glColor3fv(BLUE_RGB);
-//
-//	glTranslatef(x + (width/2), y + (height/2), 0);
-//	glRotatef(angle, 0.0, 0.0, 1.0);
-//	glTranslatef(-(x + width/2), -(y + height/2), 0);
-//
-//	glRectf(x, y, x+width, y+height);
-//
-//	glLoadIdentity();
+	glPopMatrix();
 }
 
 void Ball::step() {
