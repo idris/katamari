@@ -139,13 +139,26 @@ void myKeyboard(unsigned char c, int x, int y) {
             return;
     }
 }
+
 void mySpecial(int key, int x, int y) {
+	float s = sin(camera_angle * M_PI/180);
+	float c = cos(camera_angle * M_PI/180);
 	switch (key) {
 		case GLUT_KEY_UP:
-			paddle.up();
+			ball.center[0] -= s;
+			ball.center[1] += c;
 			break;
 		case GLUT_KEY_DOWN:
-			paddle.down();
+			ball.center[0] += s;
+			ball.center[1] -= c;
+			break;
+		case GLUT_KEY_LEFT:
+			ball.center[0] -= c;
+			ball.center[1] -= s;
+			break;
+		case GLUT_KEY_RIGHT:
+			ball.center[0] += c;
+			ball.center[1] += s;
 			break;
 		default:
 			break;
@@ -155,10 +168,16 @@ void mySpecial(int key, int x, int y) {
 void mySpecialUp(int key, int x, int y) {
 	switch (key) {
 		case GLUT_KEY_UP:
-			paddle.stop();
+			ball.center[1] += 1;
 			break;
 		case GLUT_KEY_DOWN:
-			paddle.stop();
+			ball.center[1] -= 1;
+			break;
+		case GLUT_KEY_LEFT:
+			ball.center[0] -= 1;
+			break;
+		case GLUT_KEY_RIGHT:
+			ball.center[0] += 1;
 			break;
 		default:
 			break;
@@ -182,7 +201,7 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutKeyboardFunc(myKeyboard);
-//	glutSpecialFunc(mySpecial);
+	glutSpecialFunc(mySpecial);
 //	glutSpecialUpFunc(mySpecialUp);
 //	glutIdleFunc(display);
     glutTimerFunc(TIMER_DELAY, myTimer, 0);
