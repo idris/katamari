@@ -14,10 +14,10 @@
 using namespace std;
 
 Sky::Sky() {
-	width = length = 100;
+	width = length = 500;
 	hwidth = width / 2;
 	hlength = length / 2;
-	height = 50;
+	height = 250;
 }
 
 void Sky::init() {
@@ -44,10 +44,11 @@ void Sky::init() {
 }
 
 void Sky::draw() {
+	glDisable(GL_LIGHTING);
 	glColor3fv(WHITE_RGB);
 	glEnable(GL_TEXTURE_2D);
 //	glBindTexture(GL_TEXTURE_2D, textureId);
-	glMaterialfv(GL_BACK, GL_AMBIENT, WHITE_RGB);
+//	glMaterialfv(GL_BACK, GL_AMBIENT, WHITE_RGB);
 
 	// back
 	glBegin(GL_QUADS);
@@ -115,4 +116,6 @@ void Sky::draw() {
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
+
+	glEnable(GL_LIGHTING);
 }
