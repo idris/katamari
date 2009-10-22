@@ -1,0 +1,295 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09530218108958A00004F90D /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09530217108958A00004F90D /* GLUT.framework */; };
+		0953021A108958A00004F90D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09530219108958A00004F90D /* OpenGL.framework */; };
+		095302351089590F0004F90D /* paddle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 095302331089590F0004F90D /* paddle.cpp */; };
+		0953023A108959330004F90D /* ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09530236108959330004F90D /* ball.cpp */; };
+		0953023B108959330004F90D /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09530238108959330004F90D /* common.cpp */; };
+		0953029E10895DCE0004F90D /* katamari.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0953029D10895DCE0004F90D /* katamari.cpp */; };
+		095302A010895F710004F90D /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0953029F10895F710004F90D /* CoreFoundation.framework */; };
+		095302A210895F710004F90D /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095302A110895F710004F90D /* IOKit.framework */; };
+		097635FB108EA875009E58C4 /* floor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 097635FA108EA875009E58C4 /* floor.cpp */; };
+		09DFC6AD108FF918007C3931 /* RGBpixmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09DFC6AB108FF918007C3931 /* RGBpixmap.cpp */; };
+		09DFC6D1108FFA1F007C3931 /* sky.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09DFC6CF108FFA1F007C3931 /* sky.cpp */; };
+		09DFC6D5108FFA33007C3931 /* unimotion.c in Sources */ = {isa = PBXBuildFile; fileRef = 09DFC6D3108FFA33007C3931 /* unimotion.c */; };
+		8DD76F6A0486A84900D96B5E /* katamari.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* katamari.1 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				8DD76F6A0486A84900D96B5E /* katamari.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		09530217108958A00004F90D /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		09530219108958A00004F90D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		095302331089590F0004F90D /* paddle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle.cpp; sourceTree = "<group>"; };
+		095302341089590F0004F90D /* paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = paddle.h; sourceTree = "<group>"; };
+		09530236108959330004F90D /* ball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ball.cpp; sourceTree = "<group>"; };
+		09530237108959330004F90D /* ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ball.h; sourceTree = "<group>"; };
+		09530238108959330004F90D /* common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = common.cpp; sourceTree = "<group>"; };
+		09530239108959330004F90D /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		0953029D10895DCE0004F90D /* katamari.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = katamari.cpp; sourceTree = "<group>"; };
+		0953029F10895F710004F90D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		095302A110895F710004F90D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		097635F9108EA875009E58C4 /* floor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = floor.h; sourceTree = "<group>"; };
+		097635FA108EA875009E58C4 /* floor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = floor.cpp; sourceTree = "<group>"; };
+		09DFC6AB108FF918007C3931 /* RGBpixmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RGBpixmap.cpp; sourceTree = "<group>"; };
+		09DFC6AC108FF918007C3931 /* RGBpixmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGBpixmap.h; sourceTree = "<group>"; };
+		09DFC6CF108FFA1F007C3931 /* sky.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sky.cpp; sourceTree = "<group>"; };
+		09DFC6D0108FFA1F007C3931 /* sky.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sky.h; sourceTree = "<group>"; };
+		09DFC6D3108FFA33007C3931 /* unimotion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unimotion.c; sourceTree = "<group>"; };
+		09DFC6D4108FFA33007C3931 /* unimotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unimotion.h; sourceTree = "<group>"; };
+		09DFC71A10900556007C3931 /* skybox-clouds.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "skybox-clouds.bmp"; sourceTree = "<group>"; };
+		8DD76F6C0486A84900D96B5E /* katamari */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = katamari; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6859E8B029090EE04C91782 /* katamari.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = katamari.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09530218108958A00004F90D /* GLUT.framework in Frameworks */,
+				0953021A108958A00004F90D /* OpenGL.framework in Frameworks */,
+				095302A010895F710004F90D /* CoreFoundation.framework in Frameworks */,
+				095302A210895F710004F90D /* IOKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* katamari */ = {
+			isa = PBXGroup;
+			children = (
+				09DFC71A10900556007C3931 /* skybox-clouds.bmp */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+				09530217108958A00004F90D /* GLUT.framework */,
+				09530219108958A00004F90D /* OpenGL.framework */,
+				0953029F10895F710004F90D /* CoreFoundation.framework */,
+				095302A110895F710004F90D /* IOKit.framework */,
+			);
+			name = katamari;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				09DFC6D2108FFA33007C3931 /* unimotion */,
+				09DFC6CF108FFA1F007C3931 /* sky.cpp */,
+				09DFC6D0108FFA1F007C3931 /* sky.h */,
+				09DFC6A9108FF918007C3931 /* RGBpixmap */,
+				097635F9108EA875009E58C4 /* floor.h */,
+				097635FA108EA875009E58C4 /* floor.cpp */,
+				0953029D10895DCE0004F90D /* katamari.cpp */,
+				09530236108959330004F90D /* ball.cpp */,
+				09530237108959330004F90D /* ball.h */,
+				09530238108959330004F90D /* common.cpp */,
+				09530239108959330004F90D /* common.h */,
+				095302331089590F0004F90D /* paddle.cpp */,
+				095302341089590F0004F90D /* paddle.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		09DFC6A9108FF918007C3931 /* RGBpixmap */ = {
+			isa = PBXGroup;
+			children = (
+				09DFC6AB108FF918007C3931 /* RGBpixmap.cpp */,
+				09DFC6AC108FF918007C3931 /* RGBpixmap.h */,
+			);
+			path = RGBpixmap;
+			sourceTree = "<group>";
+		};
+		09DFC6D2108FFA33007C3931 /* unimotion */ = {
+			isa = PBXGroup;
+			children = (
+				09DFC6D3108FFA33007C3931 /* unimotion.c */,
+				09DFC6D4108FFA33007C3931 /* unimotion.h */,
+			);
+			path = unimotion;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* katamari */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6859E8C029090F304C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				C6859E8B029090EE04C91782 /* katamari.1 */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* katamari */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "katamari" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = katamari;
+			productInstallPath = "$(HOME)/bin";
+			productName = katamari;
+			productReference = 8DD76F6C0486A84900D96B5E /* katamari */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "katamari" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* katamari */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* katamari */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				095302351089590F0004F90D /* paddle.cpp in Sources */,
+				0953023A108959330004F90D /* ball.cpp in Sources */,
+				0953023B108959330004F90D /* common.cpp in Sources */,
+				0953029E10895DCE0004F90D /* katamari.cpp in Sources */,
+				097635FB108EA875009E58C4 /* floor.cpp in Sources */,
+				09DFC6AD108FF918007C3931 /* RGBpixmap.cpp in Sources */,
+				09DFC6D1108FFA1F007C3931 /* sky.cpp in Sources */,
+				09DFC6D5108FFA33007C3931 /* unimotion.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_GLIBCXX_DEBUG=1",
+					"_GLIBCXX_DEBUG_PEDANTIC=1",
+				);
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../Downloads/unimotion/Frameworks\"",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				PRODUCT_NAME = katamari;
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../Downloads/unimotion/Frameworks\"",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				PRODUCT_NAME = katamari;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "katamari" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "katamari" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
