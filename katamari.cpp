@@ -20,7 +20,13 @@
 
 using namespace std;
 
-GLint TIMER_DELAY = 5;
+GLint TIMER_DELAY = 10;
+
+GLdouble camera_distance = 20.0;
+GLdouble camera_angle = 0.0;
+GLdouble camera_height_angle = 10.0;
+
+bool use_accelerometer = false;
 
 GLfloat light_diffuse[] = {1.0, 0.0, 0.0, 1.0};  /* Red diffuse light. */
 GLfloat light_position[] = {1.0, -1.0, 1.0, 0.0};  /* Infinite light location. */
@@ -39,9 +45,6 @@ void myReshape(int w, int h) {
 void display(void) {
 	GLdouble xyCameraRadius;
 	GLdouble camera_height;
-	GLdouble camera_distance = 4.0;
-	GLdouble camera_angle = 30.0;
-	GLdouble camera_height_angle = 30.0;
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -55,7 +58,7 @@ void display(void) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 //	gluPerspective(<#GLdouble fovy#>, <#GLdouble aspect#>, <#GLdouble zNear#>, <#GLdouble zFar#>)
-	gluPerspective(60.0, 1.0, 0.5, 100.0);
+	gluPerspective(60.0, 1.0, 0.5, 500.0);
 	glMatrixMode(GL_MODELVIEW);
 
 	// draw the floor
@@ -76,8 +79,17 @@ void display(void) {
 
 void myTimer(int id) {
 	double x, y, z;
-	read_sms_real(sms_type, &x, &y, &z);
-	paddle.direction = y * 10.0f;
+	
+	if(use_accelerometer) {
+		read_sms_real(sms_type, &x, &y, &z);
+		camera_height_angle = 30.0 + 120.0 * y;
+		camera_angle = 30.0 + 120.0 * x;
+	}
+
+//	cout << x << " " << y << " " << z << endl;
+
+
+//	paddle.direction = y * 10.0f;
 //	paddle.dy = 0.2f;
 //	if(y > 0) {
 //		paddle.down();
@@ -85,9 +97,9 @@ void myTimer(int id) {
 //		paddle.up();
 //	}
 
-	paddle.step();
-	ball.step();
-	
+//	paddle.step();
+//	ball.step();
+
 	glutPostRedisplay();
     glutTimerFunc(TIMER_DELAY, myTimer, 0);
 }
@@ -97,23 +109,40 @@ void myKeyboard(unsigned char c, int x, int y) {
         case 'q':
             exit(0);
             return;
+		case 'e':
+			camera_angle -= 5.0;
+			return;
 		case 'r':
-			ball.reset();
-			paddle.reset();
+			camera_angle += 5.0;
+			return;
+		case 'd':
+			camera_height_angle -= 5;
+			return;
+		case 'f':
+			camera_height_angle += 5;
+			return;
+		case 'c':
+			camera_distance -= 5;
+			return;
+		case 'v':
+			camera_distance += 5;
 			return;
 		case '-':
 		case '_':
-			ball.slower();
-			paddle.slower();
+//			ball.slower();
+//			paddle.slower();
 			return;
 		case '+':
 		case '=':
-			ball.faster();
-			paddle.faster();
+//			ball.faster();
+//			paddle.faster();
+			return;
+		case 'a':
+			use_accelerometer = !use_accelerometer;
 			return;
         default:
             cout << "Hit q to quit.  All other characters ignored" << endl;
-            break;
+            return;
     }
 }
 void mySpecial(int key, int x, int y) {
@@ -154,11 +183,11 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);
     glutReshapeFunc(myReshape);
-//    glutKeyboardFunc(myKeyboard);
+    glutKeyboardFunc(myKeyboard);
 //	glutSpecialFunc(mySpecial);
 //	glutSpecialUpFunc(mySpecialUp);
 //	glutIdleFunc(display);
-//    glutTimerFunc(TIMER_DELAY, myTimer, 0);
+    glutTimerFunc(TIMER_DELAY, myTimer, 0);
 
 
 	/* initialize 3d environment */
@@ -182,14 +211,20 @@ int main(int argc, char** argv)
 	glEnable(GL_DEPTH_TEST);
 
 	//setup lighting
-	GLfloat globalambient[] = {0.5,0.5,0.5,1.0};
-	GLfloat sun_direction[] = {5.0, -5.0, 5.0, 0.0};
-	GLfloat sun_intensity[] = {0.8, 0.8, 0.8, 1.0};
+//	GLfloat globalposition[] = {0.5, 0.5, 200.0};
+	GLfloat globalambient[] = {0.6, 0.6, 0.6, 1.0};
+//	GLfloat globaldiffuse[] = {5.0, 5.0, 5.0, 1.0};
+	GLfloat sun_direction[] = {1.0, -1.0, 2.0, 0.0};
+	GLfloat sun_intensity[] = {0.5, 0.5, 0.5, 1.0};
 	glEnable(GL_LIGHTING);
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalambient);
 	glEnable(GL_LIGHT0);
 	glLightfv(GL_LIGHT0, GL_POSITION, sun_direction);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, sun_intensity);
+//	glEnable(GL_LIGHT1);
+//	glLightfv(GL_LIGHT1, GL_AMBIENT, globalambient);
+//	glLightfv(GL_LIGHT1, GL_DIFFUSE, globaldiffuse);
+//	glLightfv(GL_LIGHT1, GL_POSITION, globalposition);
 	glEnable(GL_COLOR_MATERIAL);
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
