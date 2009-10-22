@@ -60,7 +60,7 @@ void display(void) {
 	gluPerspective(60.0, 1.0, 0.5, 500.0);
 	glMatrixMode(GL_MODELVIEW);
 
-//	theFloor.draw();
+	theFloor.draw();
 	sky.draw();
 
 	ball.draw();
