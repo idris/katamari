@@ -25,11 +25,11 @@ GLdouble camera_angle = 0.0;
 GLdouble camera_height_angle = 10.0;
 
 bool use_accelerometer = false;
+int sms_type = 0;
 
 GLfloat light_diffuse[] = {1.0, 0.0, 0.0, 1.0};  /* Red diffuse light. */
 GLfloat light_position[] = {1.0, -1.0, 1.0, 0.0};  /* Infinite light location. */
 
-int sms_type;
 
 void reshape(int w, int h) {
 	sky.init();
@@ -70,12 +70,14 @@ void display(void) {
 
 void myTimer(int id) {
 	double x, y, z;
-	
-	if(use_accelerometer) {
+
+#ifdef __APPLE__
+	if(use_accelerometer && sms_type > 0) {
 		read_sms_real(sms_type, &x, &y, &z);
 		camera_height_angle = 30.0 + 120.0 * y;
 		camera_angle = 30.0 + 120.0 * x;
 	}
+#endif
 
 //	cout << x << " " << y << " " << z << endl;
 
@@ -165,7 +167,11 @@ void mySpecialUp(int key, int x, int y) {
 
 int main(int argc, char** argv)
 {
+#ifdef __APPLE__
 	sms_type = detect_sms();
+#endif
+
+	readObjects();
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
