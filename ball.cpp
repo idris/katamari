@@ -37,7 +37,7 @@ void Ball::draw() {
 	glColor3f(0.0, 0.3, 0.6);
 
 	glPushMatrix();
-	glTranslatef(center[0], center[1], center[3]);
+	glTranslatef(center[0], center[1], center[2]);
 //	glRotatef(45.0, 0.0f, 0.0f, 1.0f);
 	glTranslatef(0.0 - width/2, 0.0 - length/2, 0.0 - height/2);
 

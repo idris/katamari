@@ -28,7 +28,7 @@ void Cube::draw() {
 	glColor3fv(color);
 
 	glPushMatrix();
-	glTranslatef(center[0], center[1], center[3]);
+	glTranslatef(center[0], center[1], center[2]);
 	glRotatef(angle, 0.0f, 0.0f, 1.0f);
 	glTranslatef(0.0 - width/2, 0.0 - length/2, 0.0 - height/2);
 
