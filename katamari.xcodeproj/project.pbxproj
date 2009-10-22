@@ -19,6 +19,7 @@
 		09DFC6AD108FF918007C3931 /* RGBpixmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09DFC6AB108FF918007C3931 /* RGBpixmap.cpp */; };
 		09DFC6D1108FFA1F007C3931 /* sky.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09DFC6CF108FFA1F007C3931 /* sky.cpp */; };
 		09DFC6D5108FFA33007C3931 /* unimotion.c in Sources */ = {isa = PBXBuildFile; fileRef = 09DFC6D3108FFA33007C3931 /* unimotion.c */; };
+		09FBEBC310910D1C0002B8E1 /* cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09FBEBC110910D1C0002B8E1 /* cube.cpp */; };
 		8DD76F6A0486A84900D96B5E /* katamari.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* katamari.1 */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		09DFC6D3108FFA33007C3931 /* unimotion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unimotion.c; sourceTree = "<group>"; };
 		09DFC6D4108FFA33007C3931 /* unimotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unimotion.h; sourceTree = "<group>"; };
 		09DFC71A10900556007C3931 /* skybox-clouds.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "skybox-clouds.bmp"; sourceTree = "<group>"; };
+		09FBEBC110910D1C0002B8E1 /* cube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
+		09FBEBC210910D1C0002B8E1 /* cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cube.h; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* katamari */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = katamari; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859E8B029090EE04C91782 /* katamari.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = katamari.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +96,8 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				09FBEBC110910D1C0002B8E1 /* cube.cpp */,
+				09FBEBC210910D1C0002B8E1 /* cube.h */,
 				09DFC6D2108FFA33007C3931 /* unimotion */,
 				09DFC6CF108FFA1F007C3931 /* sky.cpp */,
 				09DFC6D0108FFA1F007C3931 /* sky.h */,
@@ -195,6 +200,7 @@
 				09DFC6AD108FF918007C3931 /* RGBpixmap.cpp in Sources */,
 				09DFC6D1108FFA1F007C3931 /* sky.cpp in Sources */,
 				09DFC6D5108FFA33007C3931 /* unimotion.c in Sources */,
+				09FBEBC310910D1C0002B8E1 /* cube.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

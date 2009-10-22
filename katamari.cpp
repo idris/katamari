@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cmath>
+#include <fstream>
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -30,6 +31,8 @@ int sms_type = 0;
 GLfloat light_diffuse[] = {1.0, 0.0, 0.0, 1.0};  /* Red diffuse light. */
 GLfloat light_position[] = {1.0, -1.0, 1.0, 0.0};  /* Infinite light location. */
 
+
+int numObjects = 0;
 
 void reshape(int w, int h) {
 	sky.init();
@@ -62,6 +65,10 @@ void display(void) {
 
 	theFloor.draw();
 	sky.draw();
+
+	for(int i=0;i<numObjects;i++) {
+		objects[i].draw();
+	}
 
 	ball.draw();
 
@@ -184,8 +191,34 @@ void mySpecialUp(int key, int x, int y) {
 	}
 }
 
-int main(int argc, char** argv)
-{
+void readObjects() {
+	ifstream inFile;
+	inFile.open("objects.txt");
+	if(!inFile) {
+		cerr << "Unable to open objects.txt" << endl;
+	}
+
+	inFile >> numObjects;
+
+	objects = new Cube[numObjects];
+
+	char type[10];
+
+	int i = 0;
+	while(!inFile.eof()) {
+		inFile >> type;
+		if(strcmp("CUBE", type) == 0) {
+			objects[i].read(&inFile);
+		} else {
+			cerr << "Unknown object type: " << type << endl;
+		}
+		i++;
+	}
+
+	inFile.close();
+}
+
+int main(int argc, char** argv) {
 #ifdef __APPLE__
 	sms_type = detect_sms();
 #endif
