@@ -10,6 +10,7 @@ class Ball {
 	float dx;
 	float dy;
 	float width;
+	float length;
 	float height;
 	float angle;
 	float spin;

@@ -9,30 +9,11 @@
 using namespace std;
 
 
-GLfloat n[6][3] = {  /* Normals for the 6 faces of a cube. */
-	{-1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {1.0, 0.0, 0.0},
-	{0.0, -1.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, -1.0} };
-
-GLint faces[6][4] = {  /* Vertex indices for the 6 faces of a cube. */
-	{0, 1, 2, 3}, {3, 2, 6, 7}, {7, 6, 5, 4},
-	{4, 5, 1, 0}, {5, 6, 2, 1}, {7, 4, 0, 3} };
-
-
 Ball::Ball() {
 	reset();
 }
 
 void Ball::reset() {
-	radius = 1.0f;
-	center[0] = center[1] = center[2] = 0.5f;
-
-	v[0][0] = v[1][0] = v[2][0] = v[3][0] = -1;
-	v[4][0] = v[5][0] = v[6][0] = v[7][0] = 1;
-	v[0][1] = v[1][1] = v[4][1] = v[5][1] = -1;
-	v[2][1] = v[3][1] = v[6][1] = v[7][1] = 1;
-	v[0][2] = v[3][2] = v[4][2] = v[7][2] = 1;
-	v[1][2] = v[2][2] = v[5][2] = v[6][2] = -1;
-
 	x = 0.5;
 	y = 0.5;
 	dx = 0.0030;
@@ -42,64 +23,78 @@ void Ball::reset() {
 	angle = 45;
 	spin = -1;
 	speed = 1;
+
+	radius = 10.0;
+	width = 10.0;
+	length = 10.0;
+	height = 10.0;
+
+	center[0] = center[1] = 0.0;
+	center[2] = height/2;
 }
 
 void Ball::draw() {
+	glColor3f(0.0, 0.3, 0.6);
+
 	glPushMatrix();
-//	glTranslatef(-0.5, -0.5, -0.5);
-//	glRotatef(90.0f, -1.0f, 0.0f, 0.0f);
-//	glTranslatef(0.5, 0.5, 0.5);
+	glTranslatef(center[0], center[1], center[3]);
+//	glRotatef(45.0, 0.0f, 0.0f, 1.0f);
+	glTranslatef(0.0 - width/2, 0.0 - length/2, 0.0 - height/2);
 
 	// front
-	glColor3fv(BLUE_RGB);
 	glBegin(GL_QUADS);
 	glNormal3f(0.0f, -1.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 1.0f);
+	glVertex3f(width, 0.0f, 0.0f);
+	glVertex3f(width, 0.0f, height);
+	glVertex3f(0.0f, 0.0f, height);
 	glEnd();
-
+	
+	// back
+	glBegin(GL_QUADS);
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, length, 0.0f);
+	glVertex3f(width, length, 0.0f);
+	glVertex3f(width, length, height);
+	glVertex3f(0.0f, length, height);
+	glEnd();
+	
 	// left
-//	glColor3fv(BLUE_RGB);
 	glBegin(GL_QUADS);
 	glNormal3f(-1.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, length, 0.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 1.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, height);
+	glVertex3f(0.0f, length, height);
 	glEnd();
-
+	
 	// right
-//	glColor3fv(BLUE_RGB);
 	glBegin(GL_QUADS);
 	glNormal3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 1.0f, 0.0f);
-	glVertex3f(1.0f, 1.0f, 1.0f);
-	glVertex3f(1.0f, 0.0f, 1.0f);
+	glVertex3f(width, 0.0f, 0.0f);
+	glVertex3f(width, length, 0.0f);
+	glVertex3f(width, length, height);
+	glVertex3f(width, 0.0f, height);
 	glEnd();
-
+	
 	// top
-//	glColor3fv(GREEN_RGB);
 	glBegin(GL_QUADS);
 	glNormal3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(1.0f, 0.0f, 1.0f);
-	glVertex3f(1.0f, 1.0f, 1.0f);
-	glVertex3f(0.0f, 1.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, height);
+	glVertex3f(width, 0.0f, height);
+	glVertex3f(width, length, height);
+	glVertex3f(0.0f, length, height);
 	glEnd();
-
+	
 	// bottom
-//	glColor3fv(GREEN_RGB);
 	glBegin(GL_QUADS);
 	glNormal3f(0.0f, 0.0f, -1.0f);
-	glVertex3f(1.0f, 1.0f, 0.0f);
-	glVertex3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(width, length, 0.0f);
+	glVertex3f(width, 0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, length, 0.0f);
 	glEnd();
-
+	
 	glPopMatrix();
 }
 

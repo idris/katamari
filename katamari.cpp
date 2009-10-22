@@ -101,22 +101,23 @@ void myKeyboard(unsigned char c, int x, int y) {
             exit(0);
             return;
 		case 'e':
-			camera_angle -= 5.0;
+			camera_angle -= 2;
 			return;
 		case 'r':
-			camera_angle += 5.0;
+			camera_angle += 2;
 			return;
 		case 'd':
-			camera_height_angle -= 5;
+			camera_height_angle -= 2;
 			return;
 		case 'f':
-			camera_height_angle += 5;
+			camera_height_angle += 2;
 			return;
 		case 'c':
-			camera_distance -= 5;
+			if(camera_distance > 1)
+				camera_distance -= 1;
 			return;
 		case 'v':
-			camera_distance += 5;
+			camera_distance += 1;
 			return;
 		case '-':
 		case '_':
