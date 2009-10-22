@@ -196,6 +196,7 @@ void readObjects() {
 	inFile.open("objects.txt");
 	if(!inFile) {
 		cerr << "Unable to open objects.txt" << endl;
+		return;
 	}
 
 	inFile >> numObjects;
