@@ -15,8 +15,6 @@
 #endif
 
 #include "common.h"
-#include "ball.h"
-#include "paddle.h"
 
 using namespace std;
 
@@ -33,7 +31,8 @@ GLfloat light_position[] = {1.0, -1.0, 1.0, 0.0};  /* Infinite light location. *
 
 int sms_type;
 
-void myReshape(int w, int h) {
+void reshape(int w, int h) {
+	sky.init();
 //    glViewport (0, 0, w, h);
 //    glMatrixMode(GL_PROJECTION);
 //    glLoadIdentity();
@@ -61,16 +60,8 @@ void display(void) {
 	gluPerspective(60.0, 1.0, 0.5, 500.0);
 	glMatrixMode(GL_MODELVIEW);
 
-	// draw the floor
-	glColor3fv(WHITE_RGB);
-	glBegin(GL_QUADS);
-	glNormal3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(-50.0f, -50.0f, 0.0f);
-	glVertex3f(50.0f, -50.0f, 0.0f);
-	glVertex3f(50.0f, 50.0f, 0.0f);
-	glVertex3f(-50.0f, 50.0f, 0.0f);
-	glEnd();
-
+//	theFloor.draw();
+	sky.draw();
 
 	ball.draw();
 
@@ -182,7 +173,7 @@ int main(int argc, char** argv)
     glutCreateWindow(argv[0]);
 
     glutDisplayFunc(display);
-    glutReshapeFunc(myReshape);
+    glutReshapeFunc(reshape);
     glutKeyboardFunc(myKeyboard);
 //	glutSpecialFunc(mySpecial);
 //	glutSpecialUpFunc(mySpecialUp);

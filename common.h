@@ -3,6 +3,8 @@
 
 #include "ball.h"
 #include "paddle.h"
+#include "floor.h"
+#include "sky.h"
 
 extern GLfloat RED_RGB[];
 extern GLfloat GREEN_RGB[];
@@ -12,3 +14,5 @@ extern GLfloat WHITE_RGB[];
 
 extern Ball ball;
 extern Paddle paddle;
+extern Floor theFloor;
+extern Sky sky;
