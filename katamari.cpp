@@ -21,9 +21,9 @@ using namespace std;
 
 GLint TIMER_DELAY = 10;
 
-GLdouble camera_distance = 20.0;
+GLdouble camera_distance = 50.0;
 GLdouble camera_angle = 0.0;
-GLdouble camera_height_angle = 10.0;
+GLdouble camera_height_angle = 20.0;
 
 bool use_accelerometer = false;
 int sms_type = 0;
@@ -73,6 +73,10 @@ void display(void) {
 	ball.draw();
 
     glutSwapBuffers();
+}
+
+void myIdle() {
+	glutPostRedisplay();
 }
 
 void myTimer(int id) {
@@ -237,8 +241,8 @@ int main(int argc, char** argv) {
     glutKeyboardFunc(myKeyboard);
 	glutSpecialFunc(mySpecial);
 //	glutSpecialUpFunc(mySpecialUp);
-//	glutIdleFunc(display);
-    glutTimerFunc(TIMER_DELAY, myTimer, 0);
+	glutIdleFunc(myIdle);
+//    glutTimerFunc(TIMER_DELAY, myTimer, 0);
 
 
 	/* initialize 3d environment */

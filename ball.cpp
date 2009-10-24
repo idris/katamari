@@ -5,8 +5,35 @@
 #include "common.h"
 #include "ball.h"
 
+#include "Quaternion.h"
+#include "Vector3D.h"
+
+#include <sys/timeb.h>
+
 #include <iostream>
 using namespace std;
+
+
+void getMultMatrix(Quaternion *q, GLdouble *m) {
+	double *qm = (double*)(q->getRotationMatrix().m);
+
+	m[0] = qm[0];
+	m[1] = qm[3];
+	m[2] = qm[6];
+	m[3] = 0;
+	m[4] = qm[1];
+	m[5] = qm[4];
+	m[6] = qm[7];
+	m[7] = 0;
+	m[8] = qm[2];
+	m[9] = qm[5];
+	m[10] = qm[8];
+	m[11] = 0;
+	m[12] = 0;
+	m[13] = 0;
+	m[14] = 0;
+	m[15] = 1;
+}
 
 
 Ball::Ball() {
@@ -17,12 +44,14 @@ void Ball::reset() {
 	x = 0.5;
 	y = 0.5;
 	dx = 0.0030;
-	dy = -0.0020;
+	dy = -0.0030;
 	width = 0.08;
 	height = 0.08;
 	angle = 45;
 	spin = -1;
 	speed = 1;
+	angleX = 0;
+	angleY = 0;
 
 	radius = 10.0;
 	width = 10.0;
@@ -34,11 +63,31 @@ void Ball::reset() {
 }
 
 void Ball::draw() {
-	glColor3f(0.0, 0.3, 0.6);
+	struct timeb lastTime;
+	memcpy(&lastTime, &time, sizeof(struct timeb));
+	ftime(&time);
 
+	double dt = time.millitm -  lastTime.millitm;
+	if(dt < 0) {
+		dt += 1000;
+	}
+	cout << time.time << "." << time.millitm << " diff: " << dt << endl;
+
+
+	Quaternion qx(angleX += (dx * dt * 50), *(new Vector3D(1.0,0.0,0.0)));
+	Quaternion qy(angleY += (dy * dt * 50), *(new Vector3D(0.0,1.0,0.0)));
+	GLdouble mx[16];
+	GLdouble my[16];
+
+	getMultMatrix(&qx, mx);
+	getMultMatrix(&qy, my);
+
+
+	glColor3f(0.0, 0.3, 0.6);
 	glPushMatrix();
 	glTranslatef(center[0], center[1], center[2]);
-//	glRotatef(45.0, 0.0f, 0.0f, 1.0f);
+	glMultMatrixd(mx);
+	glMultMatrixd(my);
 	glTranslatef(0.0 - width/2, 0.0 - length/2, 0.0 - height/2);
 
 	// front
@@ -49,7 +98,7 @@ void Ball::draw() {
 	glVertex3f(width, 0.0f, height);
 	glVertex3f(0.0f, 0.0f, height);
 	glEnd();
-	
+
 	// back
 	glBegin(GL_QUADS);
 	glNormal3f(0.0f, 1.0f, 0.0f);
@@ -58,7 +107,7 @@ void Ball::draw() {
 	glVertex3f(width, length, height);
 	glVertex3f(0.0f, length, height);
 	glEnd();
-	
+
 	// left
 	glBegin(GL_QUADS);
 	glNormal3f(-1.0f, 0.0f, 0.0f);
@@ -67,7 +116,7 @@ void Ball::draw() {
 	glVertex3f(0.0f, 0.0f, height);
 	glVertex3f(0.0f, length, height);
 	glEnd();
-	
+
 	// right
 	glBegin(GL_QUADS);
 	glNormal3f(1.0f, 0.0f, 0.0f);
@@ -76,7 +125,7 @@ void Ball::draw() {
 	glVertex3f(width, length, height);
 	glVertex3f(width, 0.0f, height);
 	glEnd();
-	
+
 	// top
 	glBegin(GL_QUADS);
 	glNormal3f(0.0f, 0.0f, 1.0f);
@@ -85,7 +134,7 @@ void Ball::draw() {
 	glVertex3f(width, length, height);
 	glVertex3f(0.0f, length, height);
 	glEnd();
-	
+
 	// bottom
 	glBegin(GL_QUADS);
 	glNormal3f(0.0f, 0.0f, -1.0f);
@@ -94,7 +143,7 @@ void Ball::draw() {
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, length, 0.0f);
 	glEnd();
-	
+
 	glPopMatrix();
 }
 

@@ -1,6 +1,8 @@
 #ifndef _BALL_H
 #define _BALL_H
 
+#include <sys/timeb.h>
+
 class Ball {
 	float radius;
 
@@ -13,8 +15,11 @@ class Ball {
 	float length;
 	float height;
 	float angle;
+	float angleX;
+	float angleY;
 	float spin;
 	float speed;
+	struct timeb time;
 	void bounce();
 public:
 	float center[3];
