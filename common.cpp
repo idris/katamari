@@ -4,7 +4,6 @@
 #include "common.h"
 #include "cube.h"
 #include "ball.h"
-#include "paddle.h"
 #include "floor.h"
 
 GLfloat RED_RGB[] = {1.0, 0.0, 0.0};
@@ -16,6 +15,5 @@ GLfloat WHITE_RGB[] = {1.0, 1.0, 1.0};
 Cube *objects;
 
 Ball ball;
-Paddle paddle;
 Floor theFloor;
 Sky sky;

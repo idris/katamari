@@ -11,7 +11,6 @@
 		094BE7CB1092973D006B5B93 /* Vector3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 094BE7C81092973D006B5B93 /* Vector3D.cpp */; };
 		09530218108958A00004F90D /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09530217108958A00004F90D /* GLUT.framework */; };
 		0953021A108958A00004F90D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09530219108958A00004F90D /* OpenGL.framework */; };
-		095302351089590F0004F90D /* paddle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 095302331089590F0004F90D /* paddle.cpp */; };
 		0953023A108959330004F90D /* ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09530236108959330004F90D /* ball.cpp */; };
 		0953023B108959330004F90D /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09530238108959330004F90D /* common.cpp */; };
 		0953029E10895DCE0004F90D /* katamari.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0953029D10895DCE0004F90D /* katamari.cpp */; };
@@ -46,8 +45,6 @@
 		094BE7C91092973D006B5B93 /* Vector3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3D.h; sourceTree = "<group>"; };
 		09530217108958A00004F90D /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		09530219108958A00004F90D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
-		095302331089590F0004F90D /* paddle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle.cpp; sourceTree = "<group>"; };
-		095302341089590F0004F90D /* paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = paddle.h; sourceTree = "<group>"; };
 		09530236108959330004F90D /* ball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ball.cpp; sourceTree = "<group>"; };
 		09530237108959330004F90D /* ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ball.h; sourceTree = "<group>"; };
 		09530238108959330004F90D /* common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = common.cpp; sourceTree = "<group>"; };
@@ -117,8 +114,6 @@
 				09530237108959330004F90D /* ball.h */,
 				09530238108959330004F90D /* common.cpp */,
 				09530239108959330004F90D /* common.h */,
-				095302331089590F0004F90D /* paddle.cpp */,
-				095302341089590F0004F90D /* paddle.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -212,7 +207,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				095302351089590F0004F90D /* paddle.cpp in Sources */,
 				0953023A108959330004F90D /* ball.cpp in Sources */,
 				0953023B108959330004F90D /* common.cpp in Sources */,
 				0953029E10895DCE0004F90D /* katamari.cpp in Sources */,

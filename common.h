@@ -3,7 +3,6 @@
 
 #include "cube.h"
 #include "ball.h"
-#include "paddle.h"
 #include "floor.h"
 #include "sky.h"
 
@@ -16,6 +15,5 @@ extern GLfloat WHITE_RGB[];
 extern Cube *objects;
 
 extern Ball ball;
-extern Paddle paddle;
 extern Floor theFloor;
 extern Sky sky;
