@@ -152,7 +152,11 @@ void Ball::step() {
 		GLdouble *m = (GLdouble*)calloc(sizeof(GLdouble), 16);
 		getMultMatrix(&q, qm);
 		multiplyMatrices(rotation, qm, m);
+		free(rotation);
 		rotation = m;
+
+		center[0] += dx * l;
+		center[1] += dy * l;
 	}
 }
 
