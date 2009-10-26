@@ -8,7 +8,6 @@
 #include <GLUT/glut.h>
 #include <OpenGL/glu.h>
 #include <OpenGL/gl.h>
-#include "unimotion.h"
 #else
 #include <GL/glut.h>
 #include <GL/glu.h>
@@ -24,9 +23,6 @@ GLint TIMER_DELAY = 10;
 GLdouble camera_distance = 50.0;
 GLdouble camera_angle = 0.0;
 GLdouble camera_height_angle = 20.0;
-
-bool use_accelerometer = false;
-int sms_type = 0;
 
 GLfloat light_diffuse[] = {1.0, 0.0, 0.0, 1.0};  /* Red diffuse light. */
 GLfloat light_position[] = {1.0, -1.0, 1.0, 0.0};  /* Infinite light location. */
@@ -82,14 +78,6 @@ void myIdle() {
 void myTimer(int id) {
 	double x, y, z;
 
-#ifdef __APPLE__
-	if(use_accelerometer && sms_type > 0) {
-		read_sms_real(sms_type, &x, &y, &z);
-		camera_height_angle = 30.0 + 120.0 * y;
-		camera_angle = 30.0 + 120.0 * x;
-	}
-#endif
-
 //	cout << x << " " << y << " " << z << endl;
 
 
@@ -142,10 +130,10 @@ void myKeyboard(unsigned char c, int x, int y) {
 //			ball.faster();
 //			paddle.faster();
 			return;
-		case 'a':
+/*		case 'a':
 			use_accelerometer = !use_accelerometer;
 			return;
-        default:
+*/        default:
             cout << "Hit q to quit.  All other characters ignored" << endl;
             return;
     }
@@ -156,20 +144,24 @@ void mySpecial(int key, int x, int y) {
 	float c = cos(camera_angle * M_PI/180);
 	switch (key) {
 		case GLUT_KEY_UP:
-			ball.center[0] -= s;
-			ball.center[1] += c;
+			upKey = true;
+//			ball.center[0] -= s;
+//			ball.center[1] += c;
 			break;
 		case GLUT_KEY_DOWN:
-			ball.center[0] += s;
-			ball.center[1] -= c;
+			downKey = true;
+//			ball.center[0] += s;
+//			ball.center[1] -= c;
 			break;
 		case GLUT_KEY_LEFT:
-			ball.center[0] -= c;
-			ball.center[1] -= s;
+			leftKey = true;
+//			ball.center[0] -= c;
+//			ball.center[1] -= s;
 			break;
 		case GLUT_KEY_RIGHT:
-			ball.center[0] += c;
-			ball.center[1] += s;
+			rightKey = true;
+//			ball.center[0] += c;
+//			ball.center[1] += s;
 			break;
 		default:
 			break;
@@ -179,16 +171,20 @@ void mySpecial(int key, int x, int y) {
 void mySpecialUp(int key, int x, int y) {
 	switch (key) {
 		case GLUT_KEY_UP:
-			ball.center[1] += 1;
+			upKey = false;
+//			ball.center[1] += 1;
 			break;
 		case GLUT_KEY_DOWN:
-			ball.center[1] -= 1;
+			downKey = false;
+//			ball.center[1] -= 1;
 			break;
 		case GLUT_KEY_LEFT:
-			ball.center[0] -= 1;
+			leftKey = false;
+//			ball.center[0] -= 1;
 			break;
 		case GLUT_KEY_RIGHT:
-			ball.center[0] += 1;
+			rightKey = false;
+//			ball.center[0] += 1;
 			break;
 		default:
 			break;
@@ -224,10 +220,6 @@ void readObjects() {
 }
 
 int main(int argc, char** argv) {
-#ifdef __APPLE__
-	sms_type = detect_sms();
-#endif
-
 	readObjects();
 
     glutInit(&argc, argv);
@@ -240,7 +232,7 @@ int main(int argc, char** argv) {
     glutReshapeFunc(reshape);
     glutKeyboardFunc(myKeyboard);
 	glutSpecialFunc(mySpecial);
-//	glutSpecialUpFunc(mySpecialUp);
+	glutSpecialUpFunc(mySpecialUp);
 	glutIdleFunc(myIdle);
 //    glutTimerFunc(TIMER_DELAY, myTimer, 0);
 

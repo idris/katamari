@@ -17,3 +17,8 @@ Cube *objects;
 Ball ball;
 Floor theFloor;
 Sky sky;
+
+bool leftKey = false;
+bool rightKey = false;
+bool upKey = false;
+bool downKey = false;

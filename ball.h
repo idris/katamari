@@ -2,6 +2,7 @@
 #define _BALL_H
 
 #include <sys/timeb.h>
+#include "Quaternion.h"
 
 class Ball {
 	float radius;
@@ -17,6 +18,13 @@ class Ball {
 	float angle;
 	float angleX;
 	float angleY;
+	double accelX;
+	double accelY;
+	double xPercent;
+	double yPercent;
+	double dxPercent;
+	double dyPercent;
+	Quaternion *quat;
 	float spin;
 	float speed;
 	struct timeb time;

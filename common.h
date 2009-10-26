@@ -17,3 +17,8 @@ extern Cube *objects;
 extern Ball ball;
 extern Floor theFloor;
 extern Sky sky;
+
+extern bool leftKey;
+extern bool rightKey;
+extern bool upKey;
+extern bool downKey;
