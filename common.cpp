@@ -22,3 +22,5 @@ bool leftKey = false;
 bool rightKey = false;
 bool upKey = false;
 bool downKey = false;
+
+GLdouble camera_angle = 0.0;

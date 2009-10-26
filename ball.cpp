@@ -129,21 +129,32 @@ void Ball::step() {
 		dt += 1000;
 	}
 
+	double s = sin(camera_angle * M_PI/180);
+	double c = cos(camera_angle * M_PI/180);
+
+	double ddx=0, ddy=0;
+
 	if(upKey) {
-		dy += 0.001 * dt;
+		ddy = 0.0005 * dt;
 	}
 	if(rightKey) {
-		dx += 0.001 * dt;
+		ddx = 0.0005 * dt;
 	}
 	if(downKey) {
-		dy -= 0.001 * dt;
+		ddy = -0.0005 * dt;
 	}
 	if(leftKey) {
-		dx -= 0.001 * dt;
+		ddx = -0.0005 * dt;
 	}
 
-	dy *= 0.999;
-	dx *= 0.999;
+	cout << camera_angle << endl;
+	cout << s << " " << c << endl;
+
+	dx += c * ddx - s * ddy;
+	dy += s * ddx + c * ddy;
+
+	dx *= 0.9995;
+	dy *= 0.9995;
 
 	double l = sqrt(dx*dx + dy*dy);
 	if(l != 0) {

@@ -21,7 +21,6 @@ using namespace std;
 GLint TIMER_DELAY = 10;
 
 GLdouble camera_distance = 50.0;
-GLdouble camera_angle = 0.0;
 GLdouble camera_height_angle = 20.0;
 
 GLfloat light_diffuse[] = {1.0, 0.0, 0.0, 1.0};  /* Red diffuse light. */

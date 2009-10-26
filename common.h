@@ -22,3 +22,5 @@ extern bool leftKey;
 extern bool rightKey;
 extern bool upKey;
 extern bool downKey;
+
+extern GLdouble camera_angle;
