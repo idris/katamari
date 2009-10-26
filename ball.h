@@ -25,6 +25,8 @@ class Ball {
 	double dxPercent;
 	double dyPercent;
 	Quaternion *quat;
+	GLdouble *rotation;
+
 	float spin;
 	float speed;
 	struct timeb time;

@@ -45,6 +45,41 @@ void getMultMatrix(Quaternion *q, GLdouble *m) {
 	m[15] = 1;
 }
 
+void multiplyMatrices(GLdouble *m1, GLdouble *m2, GLdouble *m) {
+	int i,j,k;
+	for(i=0;i<4;i++) {
+		for(j=0;j<4;j++) {
+			for(k=0;k<4;k++) {
+				m[(i*4)+j] += m1[(i*4)+k] * m2[(k*4)+j];
+/*				cout << "before: m[" << i << "][" << j << "] = " << m[(i*4)+j] << endl;
+				cout << "m[" << i << "][" << j << "] += m1[" << i << "][" << k << "] * m2[" << k << "][" << j << "]" << endl;
+				cout << "after: m[" << i << "][" << j << "] = " << m[(i*4)+j] << endl;
+*/			}
+		}
+	}
+/*
+	cout << "m:[" << endl;
+	for(i=0;i<4;i++) {
+		cout << m[(i*4)+0] << " " << m[(i*4)+1] << " " << m[(i*4)+2] << " " << m[(i*4)+3] << endl;
+	}
+	cout << "]" << endl;
+
+	cout << "m1:[" << endl;
+	for(i=0;i<4;i++) {
+		cout << m1[(i*4)+0] << " " << m1[(i*4)+1] << " " << m1[(i*4)+2] << " " << m1[(i*4)+3] << endl;
+	}
+	cout << "]" << endl;
+
+	cout << "m2:[" << endl;
+	for(i=0;i<4;i++) {
+		cout << m2[(i*4)+0] << " " << m2[(i*4)+1] << " " << m2[(i*4)+2] << " " << m2[(i*4)+3] << endl;
+	}
+	cout << "]" << endl;
+
+	exit(0);
+*/
+}
+
 
 Ball::Ball() {
 	reset();
@@ -72,6 +107,8 @@ void Ball::reset() {
 	dxPercent = 0.0;
 	dyPercent = 0.0;
 	quat = new Quaternion(0.0, *(new Vector3D(0.0,0.0,0.0)));
+	rotation = (GLdouble*)calloc(sizeof(GLdouble), 16);
+	getMultMatrix(quat, rotation);
 
 	radius = 10.0;
 	width = 10.0;
@@ -92,184 +129,30 @@ void Ball::step() {
 		dt += 1000;
 	}
 
-//	cout << time.time << "." << time.millitm << " diff: " << dt << endl;
-/*
-	double jerkX = 0;
-	double jerkY = 0;
-
-	if(leftKey) {
-		jerkX = -1;
+	if(upKey) {
+		dy += 0.001 * dt;
 	}
 	if(rightKey) {
-		jerkX = 1;
-	}
-	if(upKey) {
-		jerkY = 1;
+		dx += 0.001 * dt;
 	}
 	if(downKey) {
-		jerkY = -1;
-	}
-
-//	accelX += jerkY / 1000;
-//	accelY += jerkX / 1000;
-
-//	accelX *= 0.5;
-//	accelY *= 0.5;
-
-	dx += jerkY / 1000;
-	dy += jerkX / 1000;
-
-	dx *= 0.999;
-	dy *= 0.999;
-
-	if(jerkY == 0 && abs(dx) < 0.01) dx = 0;
-	if(jerkX == 0 && abs(dy) < 0.01) dy = 0;
-
-	angleX += dx * dt;
-	angleY += dy * dt;
-
-//	angle += (dx + dy) * dt;
-	double dr = sqrt(dx*dx + dy*dy);
-//	angle += dr/radius;
-*/
-/*	if(angleX >= 360) angleX -= 360;
-	else if(angleX <= -360) angleX += 360;
-	if(angleY >= 360) angleY -= 360;
-	else if(angleY <= -360) angleY += 360;
-*/
-/*
-	if(abs(angleX) + abs(angleY) == 0) {
-		xPercent = yPercent = 0;
-	} else {
-		xPercent = abs(dx) / dr;
-		yPercent = abs(dy) / dr;
-	}
-*/
-//	center[0] += (dy * dt)/360 * (2 * M_PI * radius);
-//	center[1] += (dx * dt)/360 * (2 * M_PI * radius);
-
-
-#ifdef __APPLE__
-	double x, y, z;
-	if(false && sms_type > 0) {
-		read_sms_real(sms_type, &x, &y, &z);
-//		cout << x << " " << y << " " << z;
-//		xPercent = y;
-		xPercent = 0;
-		yPercent = x;
-	}
-#endif
-
-/*
-	if(upKey) {
-		xPercent += 0.1;
-	}
-	if(downKey) xPercent -= 0.1;
-	if(leftKey) yPercent -= 0.1;
-	if(rightKey) {
-		yPercent += 0.001;
-	}
-*/
-
-	double dAngle = 0;
-
-	if(upKey) {
-		dy += 0.01 * dt;
-		xPercent += 0.001 * dt;
-		if(!rightKey && !leftKey && yPercent > 0)
-			yPercent -= 0.001 * dt;
-		dAngle = 0.1 * dt;
-	}
-	if(rightKey) {
-		dx += 0.01 * dt;
-		yPercent += 0.001 * dt;
-		if(!upKey && !downKey && xPercent > 0)
-			xPercent -= 0.001 * dt;
-		dAngle = 0.1 * dt;
-	}
-	if(downKey) {
-		dy -= 0.01 * dt;
-		yPercent += 0.001 * dt;
-		if(!rightKey && !leftKey && xPercent < 0)
-			xPercent += 0.001 * dt;
-		dAngle = -0.1 * dt;
+		dy -= 0.001 * dt;
 	}
 	if(leftKey) {
-		dx -= 0.01 * dt;
-		xPercent -= 0.001 * dt;
-		if(!upKey && !downKey)
-			yPercent -= 0.001 * dt;
-		dAngle = -0.1 * dt;
+		dx -= 0.001 * dt;
 	}
 
-//	dAngle += 2.0 * abs(dAngle);
-	angle += dAngle;
-
-	if(xPercent < 0) {
-		xPercent = 0.0;
-	} else if(xPercent > 1) {
-		xPercent = 1.0;
-	} else if(xPercent < -1) {
-		xPercent = -1.0;
-	}
-	if(yPercent < 0) {
-		yPercent = 0.0;
-	} else if(yPercent > 1) {
-		yPercent = 1.0;
-	} else if(yPercent < -1) {
-		yPercent = -1.0;
-	}
-
-	// normalize x and y percents:
-	double nx, ny;
-	double l = sqrt(xPercent * xPercent + yPercent * yPercent);
-	if(l > 0) {
-		nx = xPercent / l;
-		ny = yPercent / l;
-//		center[0] += (ny * dAngle)/360 * (2 * M_PI * radius);
-//		center[1] += (nx * dAngle)/360 * (2 * M_PI * radius);
-	}
-
-	dx *= 0.999;
 	dy *= 0.999;
-	double s = sqrt(dx*dx + dy*dy);
-	angle += s;
+	dx *= 0.999;
 
-	if(s != 0) {
-		dyPercent += dx/s;
-		dxPercent += dy/s;
-	}
-
-	dxPercent *= 0.99;
-	dyPercent *= 0.99;
-
-//	cout << s << endl;
-	yPercent += dyPercent;
-	xPercent += dxPercent;
-
-	double ss = sqrt(yPercent*yPercent + xPercent*xPercent);
-
-	if(s != 0) {
-//		cout << dx / ss << endl;
-		center[0] += (yPercent * dx/ss)/360 * (2 * M_PI * radius);
-		center[1] += (xPercent * dy/ss)/360 * (2 * M_PI * radius);
-	}
-
-
-//	angle += 0.1 * dt;
-//	if(yPercent > 0 && rightKey) angle += 0.1 * dt;
-//	if(upKey || rightKey || downKey || leftKey) angle += 0.1 * dt;
-//	if(angle != 0) angle += 0.1 * dt;
-//	if(upKey || rightKey) angle += 0.1;
-//	if(leftKey || downKey) angle -= 0.1;
-	if(angle >= 360) angle -= 360;
-	if(angle < 0) angle += 360;
-
-	if(s != 0) {
-		cout << angle << " " << dx/s << " " << dy/s << endl;
-		Quaternion q(s*s, *(new Vector3D(dy/s,0.0 - dx/s,0.0)));
-		*quat += q;
-		quat->normalize();
+	double l = sqrt(dx*dx + dy*dy);
+	if(l != 0) {
+		Quaternion q(l, *(new Vector3D(dy/l,0.0 - dx/l,0.0)));
+		GLdouble qm[16];
+		GLdouble *m = (GLdouble*)calloc(sizeof(GLdouble), 16);
+		getMultMatrix(&q, qm);
+		multiplyMatrices(rotation, qm, m);
+		rotation = m;
 	}
 }
 
@@ -278,7 +161,7 @@ void Ball::draw() {
 
 //	cout << angle << " " << xPercent << " " << yPercent << endl;
 
-	double l = sqrt(xPercent*xPercent + yPercent*yPercent);
+//	double l = sqrt(xPercent*xPercent + yPercent*yPercent);
 //	double l = 1;
 
 //	Quaternion qx(angle, *(new Vector3D(xPercent/l,0.0 - yPercent/l,0.0)));
@@ -291,11 +174,11 @@ void Ball::draw() {
 
 //	Quaternion sum = qy * qx;
 //	sum.normalize();
-	GLdouble mx[16];
+//	GLdouble mx[16];
 //	GLdouble my[16];
 //	GLdouble msum[16];
 
-	getMultMatrix(quat, mx);
+//	getMultMatrix(quat, mx);
 //	getMultMatrix(&qy, my);
 //	getMultMatrix(&sum, msum);
 
@@ -304,7 +187,8 @@ void Ball::draw() {
 	glPushMatrix();
 	glTranslatef(center[0], center[1], center[2]);
 //	glMultMatrixd(msum);
-	if(l != 0) glMultMatrixd(mx);
+//	if(l != 0) glMultMatrixd(mx);
+	glMultMatrixd(rotation);
 //	glMultMatrixd(my);
 	glTranslatef(0.0 - width/2, 0.0 - length/2, 0.0 - height/2);
 
