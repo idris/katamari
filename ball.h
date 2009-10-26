@@ -6,31 +6,16 @@
 
 class Ball {
 	float radius;
-
-	GLfloat v[8][3];
-	float x;
-	float y;
 	float dx;
 	float dy;
 	float width;
 	float length;
 	float height;
-	float angle;
-	float angleX;
-	float angleY;
-	double accelX;
-	double accelY;
-	double xPercent;
-	double yPercent;
-	double dxPercent;
-	double dyPercent;
+	GLfloat color[3];
 	Quaternion *quat;
 	GLdouble *rotation;
 
-	float spin;
-	float speed;
 	struct timeb time;
-	void bounce();
 public:
 	float center[3];
 
@@ -38,8 +23,6 @@ public:
 	void reset();
 	void draw();
 	void step();
-	void slower();
-	void faster();
 };
 
 #endif
