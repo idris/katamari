@@ -16,9 +16,9 @@ using namespace std;
 Floor::Floor() {
 	width = length = 50000;
 //	color[0] = color[1] = color[2] = 1.0f;
-	color[0] = 0.7;
-	color[1] = 0.3;
-	color[2] = 0.3;
+	color[0] = 0.7f;
+	color[1] = 0.3f;
+	color[2] = 0.3f;
 }
 
 void Floor::draw() {
