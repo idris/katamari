@@ -52,7 +52,7 @@ void Sky::draw() {
 //	glBindTexture(GL_TEXTURE_2D, textureId);
 //	glMaterialfv(GL_BACK, GL_AMBIENT, WHITE_RGB);
 
-	// back
+	// front
 	glBegin(GL_QUADS);
 	glNormal3f(0.0, -1.0, 0.0);
 	glTexCoord2f(0.25, 1.0);
@@ -68,14 +68,14 @@ void Sky::draw() {
 	// right
 	glBegin(GL_QUADS);
 	glNormal3f(-1.0, 0.0, 0.0);
-	glTexCoord2f(1.0, 0.25);
-	glVertex3f(hwidth, 0.0 - hlength, 0.0);
 	glTexCoord2f(1.0, 0.75);
 	glVertex3f(hwidth, hlength, 0.0);
-	glTexCoord2f(0.75, 0.75);
-	glVertex3f(hwidth, hlength, height);
+	glTexCoord2f(1.0, 0.25);
+	glVertex3f(hwidth, 0.0 - hlength, 0.0);
 	glTexCoord2f(0.75, 0.25);
 	glVertex3f(hwidth, 0.0 - hlength, height);
+	glTexCoord2f(0.75, 0.75);
+	glVertex3f(hwidth, hlength, height);
 	glEnd();
 
 	// left
@@ -96,12 +96,12 @@ void Sky::draw() {
 	glNormal3f(0.0, 1.0, 0.0);
 	glTexCoord2f(0.75, 0.0);
 	glVertex3f(hwidth, 0.0 - hlength, 0.0);
-	glTexCoord2f(0.75, 0.25);
-	glVertex3f(hwidth, 0.0 - hlength, height);
-	glTexCoord2f(0.25, 0.25);
-	glVertex3f(0.0 - hwidth, 0.0 - hlength, height);
 	glTexCoord2f(0.25, 0.0);
 	glVertex3f(0.0 - hwidth, 0.0 - hlength, 0.0);
+	glTexCoord2f(0.25, 0.25);
+	glVertex3f(0.0 - hwidth, 0.0 - hlength, height);
+	glTexCoord2f(0.75, 0.25);
+	glVertex3f(hwidth, 0.0 - hlength, height);
 	glEnd();
 
 	// top

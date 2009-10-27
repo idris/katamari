@@ -233,6 +233,7 @@ int main(int argc, char** argv) {
 //	glLightfv(GL_LIGHT1, GL_DIFFUSE, globaldiffuse);
 //	glLightfv(GL_LIGHT1, GL_POSITION, globalposition);
 	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_CULL_FACE);
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
     glutMainLoop();

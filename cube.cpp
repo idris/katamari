@@ -49,10 +49,10 @@ void Cube::draw() {
 	// back
 	glBegin(GL_QUADS);
 	glNormal3d(0.0, 1.0, 0.0);
+	glVertex3d(0.0, length, 0.0);
 	glVertex3d(0.0, length, height);
 	glVertex3d(width, length, height);
 	glVertex3d(width, length, 0.0);
-	glVertex3d(0.0, length, 0.0);
 	glEnd();
 
 	// left
