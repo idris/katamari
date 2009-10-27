@@ -29,15 +29,13 @@ GLdouble camera_height_angle = 10.0;
 GLfloat light_diffuse[] = {1.0, 0.0, 0.0, 1.0};  /* Red diffuse light. */
 GLfloat light_position[] = {1.0, -1.0, 1.0, 0.0};  /* Infinite light location. */
 
+int viewWidth, viewHeight;
 
 void reshape(int w, int h) {
 	sky.init();
-//    glViewport (0, 0, w, h);
-//    glMatrixMode(GL_PROJECTION);
-//    glLoadIdentity();
-//    gluOrtho2D(0.0, 1.0, 0.0, 1.0);
-//    glMatrixMode(GL_MODELVIEW);
-//    glutPostRedisplay();
+	glViewport (0, 0, w, h);
+	viewWidth = w;
+	viewHeight = h;
 }
 
 void display(void) {
@@ -56,7 +54,7 @@ void display(void) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 //	gluPerspective(<#GLdouble fovy#>, <#GLdouble aspect#>, <#GLdouble zNear#>, <#GLdouble zFar#>)
-	gluPerspective(45.0, 1.0, 50.0, 50000.0);
+	gluPerspective(45.0, (GLdouble)viewWidth/viewHeight, 50.0, 50000.0);
 	glMatrixMode(GL_MODELVIEW);
 
 	theFloor.draw();
