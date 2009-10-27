@@ -15,6 +15,10 @@ class Ball {
 	Quaternion *quat;
 	GLdouble *rotation;
 	struct timeb time;
+
+	void checkCollisions();
+	bool checkCollision(Cube *object);
+
 public:
 	float center[3];
 
