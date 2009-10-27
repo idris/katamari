@@ -2,8 +2,8 @@
 #define _FLOOR_H
 
 class Floor {
-	float width;
-	float length;
+	GLdouble width;
+	GLdouble length;
 	GLfloat color[3];
 public:
 	Floor();

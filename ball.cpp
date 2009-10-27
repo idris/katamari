@@ -77,7 +77,7 @@ void Ball::reset() {
 	rotation = (GLdouble*)calloc(sizeof(GLdouble), 16);
 	getMultMatrix(quat, rotation);
 
-	radius = 5.0;
+	radius = 40.0;
 	width = radius * 2;
 	length = radius * 2;
 	height = radius * 2;

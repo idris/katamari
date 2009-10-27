@@ -20,10 +20,10 @@
 using namespace std;
 
 Sky::Sky() {
-	width = length = 500;
+	width = length = 50000;
 	hwidth = width / 2;
 	hlength = length / 2;
-	height = 250;
+	height = hwidth;
 }
 
 void Sky::init() {

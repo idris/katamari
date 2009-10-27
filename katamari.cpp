@@ -23,14 +23,12 @@ using namespace std;
 
 GLint TIMER_DELAY = 10;
 
-GLdouble camera_distance = 50.0;
-GLdouble camera_height_angle = 20.0;
+GLdouble camera_distance = 350.0;
+GLdouble camera_height_angle = 10.0;
 
 GLfloat light_diffuse[] = {1.0, 0.0, 0.0, 1.0};  /* Red diffuse light. */
 GLfloat light_position[] = {1.0, -1.0, 1.0, 0.0};  /* Infinite light location. */
 
-
-int numObjects = 0;
 
 void reshape(int w, int h) {
 	sky.init();
@@ -49,7 +47,7 @@ void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	xyCameraRadius = cos(camera_height_angle * M_PI/180) * camera_distance;
-	camera_height = ball.center[2] + sin(camera_height_angle * M_PI/180) * camera_distance;
+	camera_height = 50.0 + ball.center[2] + sin(camera_height_angle * M_PI/180) * camera_distance;
 
 	// camera stuff
 	glLoadIdentity();
@@ -58,7 +56,7 @@ void display(void) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 //	gluPerspective(<#GLdouble fovy#>, <#GLdouble aspect#>, <#GLdouble zNear#>, <#GLdouble zFar#>)
-	gluPerspective(60.0, 1.0, 0.5, 500.0);
+	gluPerspective(45.0, 1.0, 50.0, 50000.0);
 	glMatrixMode(GL_MODELVIEW);
 
 	theFloor.draw();
@@ -117,10 +115,10 @@ void myKeyboard(unsigned char c, int x, int y) {
 			return;
 		case 'c':
 			if(camera_distance > 1)
-				camera_distance -= 1;
+				camera_distance -= 10;
 			return;
 		case 'v':
-			camera_distance += 1;
+			camera_distance += 10;
 			return;
 		case '-':
 		case '_':
@@ -261,10 +259,10 @@ int main(int argc, char** argv) {
 
 	//setup lighting
 //	GLfloat globalposition[] = {0.5, 0.5, 200.0};
-	GLfloat globalambient[] = {0.6, 0.6, 0.6, 1.0};
+	GLfloat globalambient[] = {0.7, 0.7, 0.7, 1.0};
 //	GLfloat globaldiffuse[] = {5.0, 5.0, 5.0, 1.0};
 	GLfloat sun_direction[] = {1.0, -1.0, 2.0, 0.0};
-	GLfloat sun_intensity[] = {0.5, 0.5, 0.5, 1.0};
+	GLfloat sun_intensity[] = {0.6, 0.6, 0.6, 1.0};
 	glEnable(GL_LIGHTING);
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalambient);
 	glEnable(GL_LIGHT0);
