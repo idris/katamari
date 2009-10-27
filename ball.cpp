@@ -4,6 +4,9 @@
 #include <OpenGL/gl.h>
 #include "unimotion.h"
 #else
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <GL/glut.h>
 #include <GL/glu.h>
 #include <GL/gl.h>

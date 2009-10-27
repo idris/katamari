@@ -1,6 +1,3 @@
-#include <OpenGL/glu.h>
-#include <OpenGL/gl.h>
-
 #include "cube.h"
 #include "ball.h"
 #include "floor.h"

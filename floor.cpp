@@ -1,5 +1,14 @@
+#ifdef __APPLE__
 #include <OpenGL/glu.h>
 #include <OpenGL/gl.h>
+#else
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include <GL/glu.h>
+#include <GL/gl.h>
+#endif
+
 #include <math.h>
 
 #include "common.h"

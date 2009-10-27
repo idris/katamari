@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <cstdio>
-#include <cmath>
+#include <math.h>
 #include <fstream>
 
 #ifdef __APPLE__
@@ -9,6 +9,9 @@
 #include <OpenGL/glu.h>
 #include <OpenGL/gl.h>
 #else
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <GL/glut.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
