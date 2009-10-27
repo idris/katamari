@@ -14,7 +14,6 @@ class Ball {
 	GLfloat color[3];
 	Quaternion *quat;
 	GLdouble *rotation;
-
 	struct timeb time;
 public:
 	float center[3];

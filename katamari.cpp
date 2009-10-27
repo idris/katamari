@@ -76,22 +76,6 @@ void myIdle() {
 }
 
 void myTimer(int id) {
-	double x, y, z;
-
-//	cout << x << " " << y << " " << z << endl;
-
-
-//	paddle.direction = y * 10.0f;
-//	paddle.dy = 0.2f;
-//	if(y > 0) {
-//		paddle.down();
-//	} else {
-//		paddle.up();
-//	}
-
-//	paddle.step();
-//	ball.step();
-
 	glutPostRedisplay();
     glutTimerFunc(TIMER_DELAY, myTimer, 0);
 }
@@ -123,45 +107,30 @@ void myKeyboard(unsigned char c, int x, int y) {
 		case '-':
 		case '_':
 //			ball.slower();
-//			paddle.slower();
 			return;
 		case '+':
 		case '=':
 //			ball.faster();
-//			paddle.faster();
 			return;
-/*		case 'a':
-			use_accelerometer = !use_accelerometer;
-			return;
-*/        default:
-            cout << "Hit q to quit.  All other characters ignored" << endl;
+        default:
+            cout << "Invalid key pressed. Hit q to quit." << endl;
             return;
     }
 }
 
 void mySpecial(int key, int x, int y) {
-	float s = sin(camera_angle * M_PI/180);
-	float c = cos(camera_angle * M_PI/180);
 	switch (key) {
 		case GLUT_KEY_UP:
 			upKey = true;
-//			ball.center[0] -= s;
-//			ball.center[1] += c;
 			break;
 		case GLUT_KEY_DOWN:
 			downKey = true;
-//			ball.center[0] += s;
-//			ball.center[1] -= c;
 			break;
 		case GLUT_KEY_LEFT:
 			leftKey = true;
-//			ball.center[0] -= c;
-//			ball.center[1] -= s;
 			break;
 		case GLUT_KEY_RIGHT:
 			rightKey = true;
-//			ball.center[0] += c;
-//			ball.center[1] += s;
 			break;
 		default:
 			break;
@@ -172,19 +141,15 @@ void mySpecialUp(int key, int x, int y) {
 	switch (key) {
 		case GLUT_KEY_UP:
 			upKey = false;
-//			ball.center[1] += 1;
 			break;
 		case GLUT_KEY_DOWN:
 			downKey = false;
-//			ball.center[1] -= 1;
 			break;
 		case GLUT_KEY_LEFT:
 			leftKey = false;
-//			ball.center[0] -= 1;
 			break;
 		case GLUT_KEY_RIGHT:
 			rightKey = false;
-//			ball.center[0] += 1;
 			break;
 		default:
 			break;

@@ -114,9 +114,6 @@ void Ball::step() {
 		ddx = -0.0005 * dt;
 	}
 
-	cout << camera_angle << endl;
-	cout << s << " " << c << endl;
-
 	dx += c * ddx - s * ddy;
 	dy += s * ddx + c * ddy;
 
