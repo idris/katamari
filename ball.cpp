@@ -57,18 +57,18 @@ void multiplyMatrices(GLdouble *m1, GLdouble *m2, GLdouble *m) {
 
 
 Ball::Ball() {
-	reset();
+	init();
 }
 
-void Ball::reset() {
+void Ball::init() {
 	color[0] = 0.0;
 	color[1] = 0.3;
 	color[2] = 0.6;
 	dx = 0.0;
 	dy = 0.0;
-	quat = new Quaternion(0.0, *(new Vector3D(0.0,0.0,0.0)));
+	Quaternion q(0.0, *(new Vector3D(0.0,0.0,0.0)));
 	rotation = (GLdouble*)calloc(sizeof(GLdouble), 16);
-	getMultMatrix(quat, rotation);
+	getMultMatrix(&q, rotation);
 
 	radius = 40.0;
 	width = radius * 2;

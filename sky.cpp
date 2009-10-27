@@ -7,10 +7,6 @@
 #include <GL/gl.h>
 #endif
 
-#include <math.h>
-#include <iostream>
-#include <stdlib.h>
-
 #include "RGBpixmap.h"
 
 #include "common.h"

@@ -12,7 +12,6 @@ class Ball {
 	float length;
 	float height;
 	GLfloat color[3];
-	Quaternion *quat;
 	GLdouble *rotation;
 	struct timeb time;
 
@@ -23,7 +22,7 @@ public:
 	float center[3];
 
 	Ball();
-	void reset();
+	void init();
 	void draw();
 	void step();
 };

@@ -9,10 +9,6 @@
 #include <GL/gl.h>
 #endif
 
-#include <math.h>
-#include <iostream>
-
-#include "common.h"
 #include "cube.h"
 
 using namespace std;

@@ -1,6 +1,3 @@
-#include <cstdlib>
-#include <iostream>
-#include <cstdio>
 #include <math.h>
 #include <fstream>
 
