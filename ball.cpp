@@ -115,7 +115,7 @@ void Ball::step() {
 
 	double l = sqrt(dx*dx + dy*dy);
 	if(l != 0) {
-		Quaternion q(l, *(new Vector3D(dy/l,0.0 - dx/l,0.0)));
+		Quaternion q(90.0 * (l / (2*M_PI*radius)), *(new Vector3D(dy/l,0.0 - dx/l,0.0)));
 		GLdouble qm[16];
 		GLdouble *m = (GLdouble*)calloc(sizeof(GLdouble), 16);
 		getMultMatrix(&q, qm);
