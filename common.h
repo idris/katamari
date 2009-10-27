@@ -9,6 +9,7 @@ extern GLfloat BLUE_RGB[];
 extern GLfloat BLACK_RGB[];
 extern GLfloat WHITE_RGB[];
 
+extern int numObjects;
 extern Cube *objects;
 
 extern Ball ball;

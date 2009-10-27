@@ -133,6 +133,8 @@ void Ball::step() {
 		center[0] += dx * l;
 		center[1] += dy * l;
 	}
+
+	checkCollisions();
 }
 
 void Ball::draw() {
@@ -200,4 +202,60 @@ void Ball::draw() {
 	glEnd();
 
 	glPopMatrix();
+}
+
+bool Ball::checkCollision(Cube *object) {
+	double normal[3];
+	double x1 = center[0];
+	double y1 = center[1];
+	double x2 = object->center[0];
+	double y2 = object->center[1];
+
+	if(sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)) <= radius + object->radius) {
+		normal[0] = x2 - x1;
+		normal[1] = y2 - y1;
+		
+		double l = sqrt(normal[0]*normal[0] + normal[1]*normal[1]);
+		
+		normal[0] /= l;
+		normal[1] /= l;
+
+		if(dy < 0) center[1] += 0.9;
+		else center[1] -= 0.9;
+		if(dx < 0) center[0] += 0.9;
+		else center[0] -= 0.9;
+		dy *= -0.9;
+		dx *= -0.9;
+	}
+
+/*
+ double normal[3];
+
+	double objectHyp = 2 * radius * radius;
+	double objectSin = sin(object->angle * M_PI/180);
+	double objectCos = cos(object->angle * M_PI/180);
+	double objectLeft = object->center[0] - (sin * objectHyp);
+
+	if(center[0] + radius >= object->center[0] - object->radius && center[0] - radius <= object->center[0] + object->radius) {
+		if(center[1] + radius >= object->center[1] - object->radius && center[1] - radius <= object->center[1] + object->radius) {
+			cout << "COLLISION" << endl;
+
+			// find the normal of the wall we ran into
+			normal[0] = ;
+			normal[1] = ;
+
+			// bounce back
+			center[1] += -0.9 * dy;
+			dy *= -0.9;
+		}
+	}
+	return false;
+*/
+}
+
+void Ball::checkCollisions() {
+	int i;
+	for(i=0;i<numObjects;i++) {
+		checkCollision(&objects[i]);
+	}
 }
