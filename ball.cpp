@@ -159,10 +159,10 @@ void Ball::draw() {
 	// back
 	glBegin(GL_QUADS);
 	glNormal3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(0.0f, length, 0.0f);
-	glVertex3f(width, length, 0.0f);
-	glVertex3f(width, length, height);
 	glVertex3f(0.0f, length, height);
+	glVertex3f(width, length, height);
+	glVertex3f(width, length, 0.0f);
+	glVertex3f(0.0f, length, 0.0f);
 	glEnd();
 
 	// left
