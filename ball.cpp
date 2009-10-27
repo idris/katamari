@@ -2,7 +2,6 @@
 #include <GLUT/glut.h>
 #include <OpenGL/glu.h>
 #include <OpenGL/gl.h>
-#include "unimotion.h"
 #else
 #ifdef _WIN32
 #include <windows.h>
@@ -23,9 +22,6 @@
 
 #include <iostream>
 using namespace std;
-
-bool use_accelerometer = true;
-int sms_type = 0;
 
 void getMultMatrix(Quaternion *q, GLdouble *m) {
 	double *qm = (double*)(q->getRotationMatrix().m);
@@ -62,9 +58,6 @@ void multiplyMatrices(GLdouble *m1, GLdouble *m2, GLdouble *m) {
 
 Ball::Ball() {
 	reset();
-#ifdef __APPLE__
-	sms_type = detect_sms();
-#endif
 }
 
 void Ball::reset() {
