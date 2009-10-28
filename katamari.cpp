@@ -184,6 +184,14 @@ void readObjects() {
 }
 
 int main(int argc, char** argv) {
+	GLdouble lightx=1.0, lighty=1.0, lightz=2.0;
+	shadowMatrix[0][0] = 1.0;
+	shadowMatrix[1][1] = 1.0;
+	shadowMatrix[2][2] = 0.0;
+	shadowMatrix[3][3] = 1.0;
+	shadowMatrix[2][0] = (0.0-lightx) / lightz;
+	shadowMatrix[2][1] = (0.0-lighty) / lightz;
+
 	readObjects();
 
     glutInit(&argc, argv);
@@ -201,41 +209,17 @@ int main(int argc, char** argv) {
     glutTimerFunc(TIMER_DELAY, myTimer, 0);
 
 
-	/* initialize 3d environment */
-//	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-//	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-//	glEnable(GL_LIGHT0);
-//	glEnable(GL_LIGHTING);
-//	glMatrixMode(GL_PROJECTION);
-//	gluPerspective(40.0, 1.0, -9.0, 50.0);
-//	gluPerspective(40.0, 1.0, 1.0, 10.0);
-//	glMatrixMode(GL_MODELVIEW);
-//	gluLookAt(-10.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0);
-//	gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-//	glTranslatef(0.0, 0.0, -1.0);
-//	glRotatef(60, 1.0, 0.0, 0.0);
-//	glRotatef(-20, 0.0, 0.0, 1.0);
-
-//	glClearColor(0.3, 0.3, 0.3, 0.0);
-
-
 	glEnable(GL_DEPTH_TEST);
 
 	//setup lighting
-//	GLfloat globalposition[] = {0.5, 0.5, 200.0};
 	GLfloat globalambient[] = {0.45, 0.45, 0.45, 1.0};
-//	GLfloat globaldiffuse[] = {5.0, 5.0, 5.0, 1.0};
-	GLfloat sun_direction[] = {1.0, 1.0, 2.0, 0.0};
+	GLfloat sun_direction[] = {lightx, lighty, lightz, 0.0};
 	GLfloat sun_intensity[] = {0.6, 0.6, 0.6, 1.0};
 	glEnable(GL_LIGHTING);
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalambient);
 	glEnable(GL_LIGHT0);
 	glLightfv(GL_LIGHT0, GL_POSITION, sun_direction);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, sun_intensity);
-//	glEnable(GL_LIGHT1);
-//	glLightfv(GL_LIGHT1, GL_AMBIENT, globalambient);
-//	glLightfv(GL_LIGHT1, GL_DIFFUSE, globaldiffuse);
-//	glLightfv(GL_LIGHT1, GL_POSITION, globalposition);
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_CULL_FACE);
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);

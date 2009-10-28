@@ -30,4 +30,6 @@ bool rightKey = false;
 bool upKey = false;
 bool downKey = false;
 
+GLdouble shadowMatrix[4][4];
+
 GLdouble camera_angle = 0.0;

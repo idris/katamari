@@ -21,4 +21,6 @@ extern bool rightKey;
 extern bool upKey;
 extern bool downKey;
 
+extern GLdouble shadowMatrix[4][4];
+
 extern GLdouble camera_angle;

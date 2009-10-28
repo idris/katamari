@@ -138,17 +138,7 @@ void Ball::step() {
 }
 
 void Ball::draw() {
-	GLdouble shadowMatrix[4][4];
-	GLdouble lightx=1.0, lighty=1.0, lightz=2.0;
-
 	step();
-
-	shadowMatrix[0][0] = 1.0;
-	shadowMatrix[1][1] = 1.0;
-	shadowMatrix[2][2] = 0.0;
-	shadowMatrix[3][3] = 1.0;
-	shadowMatrix[2][0] = (0.0-lightx) / lightz;
-	shadowMatrix[2][1] = (0.0-lighty) / lightz;
 
 	// draw the shadow
 	glDisable(GL_LIGHTING);

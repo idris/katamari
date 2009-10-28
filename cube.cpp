@@ -9,10 +9,10 @@
 #include <GL/gl.h>
 #endif
 
+#include "common.h"
 #include "cube.h"
 
 using namespace std;
-
 
 Cube::Cube() {
 }
@@ -30,15 +30,6 @@ void Cube::read(ifstream *inFile) {
 }
 
 void Cube::draw() {
-	GLdouble shadowMatrix[4][4];
-	GLdouble lightx=1.0, lighty=1.0, lightz=2.0;
-	shadowMatrix[0][0] = 1.0;
-	shadowMatrix[1][1] = 1.0;
-	shadowMatrix[2][2] = 0.0;
-	shadowMatrix[3][3] = 1.0;
-	shadowMatrix[2][0] = (0.0-lightx) / lightz;
-	shadowMatrix[2][1] = (0.0-lighty) / lightz;
-
 	// draw the shadow
 	glDisable(GL_LIGHTING);
 	glColor3f(0.3f, 0.1f, 0.1f);
