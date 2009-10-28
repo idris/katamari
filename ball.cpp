@@ -143,6 +143,8 @@ void Ball::draw() {
 	glPushMatrix();
 	glTranslatef(center[0], center[1], center[2]);
 	glMultMatrixd(rotation);
+	glColor3f(0.3, 0.3, 0.3);
+	gluSphere(gluNewQuadric(), 1.2*radius, 40, 20);
 	glTranslatef(0.0 - width/2, 0.0 - length/2, 0.0 - height/2);
 
 	glColor3fv(color);

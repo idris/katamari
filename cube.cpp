@@ -35,6 +35,7 @@ void Cube::draw() {
 	glPushMatrix();
 	glTranslated(center[0], center[1], center[2]);
 	glRotated(angle, 0.0, 0.0, 1.0);
+	gluSphere(gluNewQuadric(), 1.2*radius, 40, 20);
 	glTranslated(0.0 - width/2, 0.0 - length/2, 0.0 - height/2);
 
 	// front
