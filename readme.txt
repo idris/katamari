@@ -1,3 +1,6 @@
+Idris Mokhtarzada
+idris@umd.edu
+
 Building and Running
 ====================
 To use the program using the provided katamari.exe file, simply run the 
@@ -26,7 +29,3 @@ the keyboard as follows:
 'f' - move the camera down
 'c' - zoom out
 'v' - zoom in
-
-
-Implementation Details
-======================
