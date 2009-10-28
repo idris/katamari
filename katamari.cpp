@@ -198,7 +198,7 @@ int main(int argc, char** argv) {
 	glutSpecialFunc(mySpecial);
 	glutSpecialUpFunc(mySpecialUp);
 	glutIdleFunc(myIdle);
-//    glutTimerFunc(TIMER_DELAY, myTimer, 0);
+    glutTimerFunc(TIMER_DELAY, myTimer, 0);
 
 
 	/* initialize 3d environment */
