@@ -23,7 +23,7 @@ Sky::Sky() {
 }
 
 void Sky::init() {
-	if (!pixmap.readBMPFile("skybox-clouds.bmp", true, true)) {
+	if (!pixmap.readBMPFile("res/skybox-clouds.bmp", true, true)) {
 		cerr << "File skybox-clouds.bmp cannot be read or illegal format" << endl;
 	}
 
