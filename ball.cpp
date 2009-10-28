@@ -256,8 +256,8 @@ bool Ball::checkCollision(Cube *object) {
 			// this usually happens when we side-swipe an object
 			dx = -oldDx;
 			dy = -oldDy;
-			center[0] += 10.0 * dx;
-			center[1] += 10.0 * dy;
+			center[0] += 5.0 * dx;
+			center[1] += 5.0 * dy;
 //			x1 = center[0];
 //			y1 = center[1];
 		}
