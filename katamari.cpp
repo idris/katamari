@@ -223,9 +223,9 @@ int main(int argc, char** argv) {
 
 	//setup lighting
 //	GLfloat globalposition[] = {0.5, 0.5, 200.0};
-	GLfloat globalambient[] = {0.7, 0.7, 0.7, 1.0};
+	GLfloat globalambient[] = {0.45, 0.45, 0.45, 1.0};
 //	GLfloat globaldiffuse[] = {5.0, 5.0, 5.0, 1.0};
-	GLfloat sun_direction[] = {1.0, -1.0, 2.0, 0.0};
+	GLfloat sun_direction[] = {1.0, 1.0, 2.0, 0.0};
 	GLfloat sun_intensity[] = {0.6, 0.6, 0.6, 1.0};
 	glEnable(GL_LIGHTING);
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalambient);
