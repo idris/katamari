@@ -217,51 +217,54 @@ void Ball::slower() {
 
 bool Ball::checkCollision(Cube *object) {
 	double normal[3];
+	double oldDx = dx;
+	double oldDy = dy;
 	double x1 = center[0];
 	double y1 = center[1];
 	double x2 = object->center[0];
 	double y2 = object->center[1];
+	double objectRadius = 1.2 * object->radius;
+	double v[2];
+	double v2[2];
 
-	if(sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)) <= radius + object->radius) {
-		normal[0] = x2 - x1;
-		normal[1] = y2 - y1;
-		
+	if(sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)) <= radius + objectRadius) {
+		normal[0] = x1 - x2;
+		normal[1] = y1 - y2;
+
 		double l = sqrt(normal[0]*normal[0] + normal[1]*normal[1]);
-		
+
 		normal[0] /= l;
 		normal[1] /= l;
 
-		if(dy < 0) center[1] += 0.9;
-		else center[1] -= 0.9;
-		if(dx < 0) center[0] += 0.9;
-		else center[0] -= 0.9;
-		dy *= -0.9;
-		dx *= -0.9;
-	}
+		v[0] = dx * abs(normal[0]);
+		v[1] = dy * abs(normal[1]);
 
-/*
- double normal[3];
+		v2[0] = dx - v[0];
+		v2[1] = dy - v[1];
 
-	double objectHyp = 2 * radius * radius;
-	double objectSin = sin(object->angle * M_PI/180);
-	double objectCos = cos(object->angle * M_PI/180);
-	double objectLeft = object->center[0] - (sin * objectHyp);
+		dx = v2[0] - 0.9*v[0];
+		dy = v2[1] - 0.9*v[1];
 
-	if(center[0] + radius >= object->center[0] - object->radius && center[0] - radius <= object->center[0] + object->radius) {
-		if(center[1] + radius >= object->center[1] - object->radius && center[1] - radius <= object->center[1] + object->radius) {
-			cout << "COLLISION" << endl;
+		// get out of the collision zone
+		center[0] += 5.0 * dx;
+		center[1] += 5.0 * dy;
+		x1 = center[0];
+		y1 = center[1];
 
-			// find the normal of the wall we ran into
-			normal[0] = ;
-			normal[1] = ;
-
-			// bounce back
-			center[1] += -0.9 * dy;
-			dy *= -0.9;
+		if(sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)) <= radius + objectRadius) {
+			// we are still in a collision. this is a problem. get out.
+			// this usually happens when we side-swipe an object
+			dx = -oldDx;
+			dy = -oldDy;
+			center[0] += 10.0 * dx;
+			center[1] += 10.0 * dy;
+//			x1 = center[0];
+//			y1 = center[1];
 		}
+		return true;
 	}
+
 	return false;
-*/
 }
 
 void Ball::checkCollisions() {
