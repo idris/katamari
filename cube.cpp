@@ -30,8 +30,33 @@ void Cube::read(ifstream *inFile) {
 }
 
 void Cube::draw() {
-	glColor3fv(color);
+	GLdouble shadowMatrix[4][4];
+	GLdouble lightx=1.0, lighty=1.0, lightz=2.0;
+	shadowMatrix[0][0] = 1.0;
+	shadowMatrix[1][1] = 1.0;
+	shadowMatrix[2][2] = 0.0;
+	shadowMatrix[3][3] = 1.0;
+	shadowMatrix[2][0] = (0.0-lightx) / lightz;
+	shadowMatrix[2][1] = (0.0-lighty) / lightz;
 
+	// draw the shadow
+	glDisable(GL_LIGHTING);
+	glColor3f(0.3f, 0.1f, 0.1f);
+	glEnable(GL_POLYGON_OFFSET_FILL);
+	glPolygonOffset(-1.0f, -1.0f);
+	glPushMatrix();
+	glMultMatrixd((GLdouble *)shadowMatrix);
+	_draw();
+	glPopMatrix();
+	glDisable(GL_POLYGON_OFFSET_FILL);
+	glEnable(GL_LIGHTING);
+	
+	// draw the object
+	glColor3fv(color);
+	_draw();
+}
+
+void Cube::_draw() {
 	glPushMatrix();
 	glTranslated(center[0], center[1], center[2]);
 	glRotated(angle, 0.0, 0.0, 1.0);

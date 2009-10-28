@@ -61,9 +61,9 @@ Ball::Ball() {
 }
 
 void Ball::init() {
-	color[0] = 0.0;
-	color[1] = 0.3;
-	color[2] = 0.6;
+	color[0] = 0.1f;
+	color[1] = 0.4f;
+	color[2] = 0.8f;
 	dx = 0.0;
 	dy = 0.0;
 	Quaternion q(0.0, *(new Vector3D(0.0,0.0,0.0)));
@@ -138,16 +138,42 @@ void Ball::step() {
 }
 
 void Ball::draw() {
+	GLdouble shadowMatrix[4][4];
+	GLdouble lightx=1.0, lighty=1.0, lightz=2.0;
+
 	step();
 
+	shadowMatrix[0][0] = 1.0;
+	shadowMatrix[1][1] = 1.0;
+	shadowMatrix[2][2] = 0.0;
+	shadowMatrix[3][3] = 1.0;
+	shadowMatrix[2][0] = (0.0-lightx) / lightz;
+	shadowMatrix[2][1] = (0.0-lighty) / lightz;
+
+	// draw the shadow
+	glDisable(GL_LIGHTING);
+	glColor3f(0.3f, 0.1f, 0.1f);
+	glEnable(GL_POLYGON_OFFSET_FILL);
+	glPolygonOffset(-1.0f, -1.0f);
+	glPushMatrix();
+	glMultMatrixd((GLdouble *)shadowMatrix);
+	_draw();
+	glPopMatrix();
+	glDisable(GL_POLYGON_OFFSET_FILL);
+	glEnable(GL_LIGHTING);
+	
+	// draw the object
+	glColor3fv(color);
+	_draw();
+}
+
+void Ball::_draw() {
 	glPushMatrix();
 	glTranslatef(center[0], center[1], center[2]);
 	glMultMatrixd(rotation);
-	glColor3f(0.3, 0.3, 0.3);
+//	glColor3f(0.3, 0.3, 0.3);
 	gluSphere(gluNewQuadric(), 1.2*radius, 40, 20);
 	glTranslatef(0.0 - width/2, 0.0 - length/2, 0.0 - height/2);
-
-	glColor3fv(color);
 
 	// front
 	glBegin(GL_QUADS);

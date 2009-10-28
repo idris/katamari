@@ -18,6 +18,7 @@ class Ball {
 
 	void checkCollisions();
 	bool checkCollision(Cube *object);
+	void _draw();
 
 public:
 	float center[3];
