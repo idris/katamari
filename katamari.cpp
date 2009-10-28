@@ -153,9 +153,9 @@ void mySpecialUp(int key, int x, int y) {
 
 void readObjects() {
 	ifstream inFile;
-	inFile.open("res/objects.txt");
+	inFile.open("objects.txt");
 	if(!inFile) {
-		cerr << "Unable to open res/objects.txt" << endl;
+		cerr << "Unable to open objects.txt" << endl;
 		return;
 	}
 

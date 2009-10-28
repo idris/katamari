@@ -1,11 +1,11 @@
 Building and Running
 ====================
 To use the program using the provided katamari.exe file, simply run the 
-program, but make sure the "res" folder is in the same directory as 
-katamari.exe.
+program, but make sure the objects.txt and skybox-clouds.bmp files are in the 
+same directory as katamari.exe.
 
 To build and run with Visual C++ Express, build as normal, but again make sure 
-the "res" folder is in the build directory.
+the above files are in the build directory, or the directory with the exe file.
 
 
 Katamari Controls
