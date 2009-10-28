@@ -70,7 +70,9 @@ void Ball::init() {
 	rotation = (GLdouble*)calloc(sizeof(GLdouble), 16);
 	getMultMatrix(&q, rotation);
 
-	radius = 40.0;
+	speed = 1;
+
+	radius = 50.0;
 	width = radius * 2;
 	length = radius * 2;
 	height = radius * 2;
@@ -89,23 +91,28 @@ void Ball::step() {
 		dt += 1000;
 	}
 
+	dt *= speed;
+
 	double s = sin(camera_angle * M_PI/180);
 	double c = cos(camera_angle * M_PI/180);
 
 	double ddx=0, ddy=0;
 
 	if(upKey) {
-		ddy = 0.0005 * dt;
+		ddy = 1;
 	}
 	if(rightKey) {
-		ddx = 0.0005 * dt;
+		ddx = 1;
 	}
 	if(downKey) {
-		ddy = -0.0005 * dt;
+		ddy = -1;
 	}
 	if(leftKey) {
-		ddx = -0.0005 * dt;
+		ddx = -1;
 	}
+
+	ddx *= 0.0006 * dt;
+	ddy *= 0.0006 * dt;
 
 	dx += c * ddx - s * ddy;
 	dy += s * ddx + c * ddy;
@@ -195,6 +202,15 @@ void Ball::draw() {
 	glEnd();
 
 	glPopMatrix();
+}
+
+void Ball::faster() {
+	speed += 0.1;
+}
+
+void Ball::slower() {
+	if(speed > 0.1)
+		speed -= 0.1;
 }
 
 bool Ball::checkCollision(Cube *object) {

@@ -14,6 +14,7 @@ class Ball {
 	GLfloat color[3];
 	GLdouble *rotation;
 	struct timeb time;
+	float speed;
 
 	void checkCollisions();
 	bool checkCollision(Cube *object);
@@ -23,8 +24,10 @@ public:
 
 	Ball();
 	void init();
-	void draw();
 	void step();
+	void draw();
+	void faster();
+	void slower();
 };
 
 #endif

@@ -13,6 +13,8 @@ Katamari Controls
 The katamari is controlled by the keyboard. Press the arrow keys to "push" the 
 katamari (up/down/left/right).
 
+To speed up or slow down animation, press + or -
+
 
 Camera Controls
 ===============

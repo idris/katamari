@@ -20,7 +20,7 @@ using namespace std;
 
 GLint TIMER_DELAY = 10;
 
-GLdouble camera_distance = 350.0;
+GLdouble camera_distance = 500.0;
 GLdouble camera_height_angle = 10.0;
 
 GLfloat light_diffuse[] = {1.0, 0.0, 0.0, 1.0};  /* Red diffuse light. */
@@ -82,15 +82,19 @@ void myKeyboard(unsigned char c, int x, int y) {
             return;
 		case 'e':
 			camera_angle -= 2;
+			if(camera_angle < 0) camera_angle += 360;
 			return;
 		case 'r':
 			camera_angle += 2;
+			if(camera_angle > 360) camera_angle -= 360;
 			return;
 		case 'd':
-			camera_height_angle -= 2;
+			if(camera_height_angle > -10)
+				camera_height_angle -= 2;
 			return;
 		case 'f':
-			camera_height_angle += 2;
+			if(camera_height_angle < 80)
+				camera_height_angle += 2;
 			return;
 		case 'c':
 			if(camera_distance > 1)
@@ -101,11 +105,11 @@ void myKeyboard(unsigned char c, int x, int y) {
 			return;
 		case '-':
 		case '_':
-//			ball.slower();
+			ball.slower();
 			return;
 		case '+':
 		case '=':
-//			ball.faster();
+			ball.faster();
 			return;
         default:
             cout << "Invalid key pressed. Hit q to quit." << endl;
