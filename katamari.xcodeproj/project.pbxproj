@@ -56,7 +56,6 @@
 		09DEB86B1097A32500A4C844 /* Vector3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3D.h; sourceTree = "<group>"; };
 		09DFC6CF108FFA1F007C3931 /* sky.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sky.cpp; sourceTree = "<group>"; };
 		09DFC6D0108FFA1F007C3931 /* sky.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sky.h; sourceTree = "<group>"; };
-		09DFC71A10900556007C3931 /* skybox-clouds.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "skybox-clouds.bmp"; sourceTree = "<group>"; };
 		09FBEBC110910D1C0002B8E1 /* cube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
 		09FBEBC210910D1C0002B8E1 /* cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cube.h; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* katamari */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = katamari; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,7 +80,6 @@
 		08FB7794FE84155DC02AAC07 /* katamari */ = {
 			isa = PBXGroup;
 			children = (
-				09DFC71A10900556007C3931 /* skybox-clouds.bmp */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
