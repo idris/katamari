@@ -13,6 +13,7 @@ class Ball {
 	float height;
 	GLfloat color[3];
 	GLdouble *rotation;
+	Quaternion *quat;
 	struct timeb time;
 	float speed;
 

@@ -24,3 +24,8 @@ extern bool downKey;
 extern GLdouble shadowMatrix[4][4];
 
 extern GLdouble camera_angle;
+
+
+void getMultMatrix(Quaternion *q, GLdouble *m);
+
+void multiplyMatrices(GLdouble *m1, GLdouble *m2, GLdouble *m);

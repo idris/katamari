@@ -11,6 +11,7 @@
 
 #include "common.h"
 #include "cube.h"
+#include "Quaternion.h"
 
 using namespace std;
 
@@ -19,6 +20,9 @@ Cube::Cube() {
 
 void Cube::read(ifstream *inFile) {
 	*inFile >> angle >> center[0] >> center[1] >> center[2] >> radius >> height >> color[0] >> color[1] >> color[2];
+
+	attached = false;
+	quat = NULL;
 
 	height = height;
 	radius = radius;
@@ -30,15 +34,31 @@ void Cube::read(ifstream *inFile) {
 }
 
 void Cube::draw() {
+	if(attached) {
+		// update my location based on the ball
+		center[0] = ball.center[0] - offset[0];
+		center[1] = ball.center[1] - offset[1];
+
+//		Quaternion q(90.0 * (l / (2*M_PI*radius)), *(new Vector3D(dy/l,0.0 - dx/l,0.0)));
+//		GLdouble qm[16];
+//		GLdouble *m = (GLdouble*)calloc(sizeof(GLdouble), 16);
+//		getMultMatrix(&q, qm);
+//		multiplyMatrices(rotation, qm, m);
+//		free(rotation);
+//		rotation = m;
+	}
+
 	// draw the shadow
 	glDisable(GL_LIGHTING);
 	glColor3f(0.3f, 0.1f, 0.1f);
 	glEnable(GL_POLYGON_OFFSET_FILL);
 	glPolygonOffset(-1.0f, -1.0f);
+
 	glPushMatrix();
 	glMultMatrixd((GLdouble *)shadowMatrix);
 	_draw();
 	glPopMatrix();
+
 	glDisable(GL_POLYGON_OFFSET_FILL);
 	glEnable(GL_LIGHTING);
 	
@@ -51,6 +71,7 @@ void Cube::_draw() {
 	glPushMatrix();
 	glTranslated(center[0], center[1], center[2]);
 	glRotated(angle, 0.0, 0.0, 1.0);
+//	if(attached) glMultMatrixd(rotation);
 	gluSphere(gluNewQuadric(), 1.2*radius, 40, 20);
 	glTranslated(0.0 - width/2, 0.0 - length/2, 0.0 - height/2);
 

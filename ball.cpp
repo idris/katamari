@@ -23,38 +23,6 @@
 #include <iostream>
 using namespace std;
 
-void getMultMatrix(Quaternion *q, GLdouble *m) {
-	double *qm = (double*)(q->getRotationMatrix().m);
-
-	m[0] = qm[0];
-	m[1] = qm[3];
-	m[2] = qm[6];
-	m[3] = 0;
-	m[4] = qm[1];
-	m[5] = qm[4];
-	m[6] = qm[7];
-	m[7] = 0;
-	m[8] = qm[2];
-	m[9] = qm[5];
-	m[10] = qm[8];
-	m[11] = 0;
-	m[12] = 0;
-	m[13] = 0;
-	m[14] = 0;
-	m[15] = 1;
-}
-
-void multiplyMatrices(GLdouble *m1, GLdouble *m2, GLdouble *m) {
-	int i,j,k;
-	for(i=0;i<4;i++) {
-		for(j=0;j<4;j++) {
-			for(k=0;k<4;k++) {
-				m[(i*4)+j] += m1[(i*4)+k] * m2[(k*4)+j];
-			}
-		}
-	}
-}
-
 
 Ball::Ball() {
 	init();
@@ -67,6 +35,7 @@ void Ball::init() {
 	dx = 0.0;
 	dy = 0.0;
 	Quaternion q(0.0, *(new Vector3D(0.0,0.0,0.0)));
+	quat = &q;
 	rotation = (GLdouble*)calloc(sizeof(GLdouble), 16);
 	getMultMatrix(&q, rotation);
 
@@ -244,40 +213,52 @@ bool Ball::checkCollision(Cube *object) {
 	double v2[2];
 
 	if(sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)) <= radius + objectRadius) {
-		normal[0] = x1 - x2;
-		normal[1] = y1 - y2;
-
-		double l = sqrt(normal[0]*normal[0] + normal[1]*normal[1]);
-
-		normal[0] /= l;
-		normal[1] /= l;
-
-		v[0] = dx * abs(normal[0]);
-		v[1] = dy * abs(normal[1]);
-
-		v2[0] = dx - v[0];
-		v2[1] = dy - v[1];
-
-		dx = v2[0] - 0.9*v[0];
-		dy = v2[1] - 0.9*v[1];
-
-		// get out of the collision zone
-		center[0] += 5.0 * dx;
-		center[1] += 5.0 * dy;
-		x1 = center[0];
-		y1 = center[1];
-
-		if(sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)) <= radius + objectRadius) {
-			// we are still in a collision. this is a problem. get out.
-			// this usually happens when we side-swipe an object
-			dx = -oldDx;
-			dy = -oldDy;
+		// collision detected!
+		if(objectRadius < radius) {
+			// attach object
+			object->attached = true;
+			object->offset[0] = center[0] - object->center[0];
+			object->offset[1] = center[1] - object->center[1];
+			object->quat = (Quaternion*) malloc(sizeof(quat));
+			memcpy(object->quat, quat, sizeof(quat));
+			return true;
+		} else {
+			// bounce off
+			normal[0] = x1 - x2;
+			normal[1] = y1 - y2;
+			
+			double l = sqrt(normal[0]*normal[0] + normal[1]*normal[1]);
+			
+			normal[0] /= l;
+			normal[1] /= l;
+			
+			v[0] = dx * abs(normal[0]);
+			v[1] = dy * abs(normal[1]);
+			
+			v2[0] = dx - v[0];
+			v2[1] = dy - v[1];
+			
+			dx = v2[0] - 0.9*v[0];
+			dy = v2[1] - 0.9*v[1];
+			
+			// get out of the collision zone
 			center[0] += 5.0 * dx;
 			center[1] += 5.0 * dy;
-//			x1 = center[0];
-//			y1 = center[1];
+			x1 = center[0];
+			y1 = center[1];
+			
+			if(sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)) <= radius + objectRadius) {
+				// we are still in a collision. this is a problem. get out.
+				// this usually happens when we side-swipe an object
+				dx = -oldDx;
+				dy = -oldDy;
+				center[0] += 5.0 * dx;
+				center[1] += 5.0 * dy;
+				//			x1 = center[0];
+				//			y1 = center[1];
+			}
+			return true;
 		}
-		return true;
 	}
 
 	return false;
@@ -286,6 +267,8 @@ bool Ball::checkCollision(Cube *object) {
 void Ball::checkCollisions() {
 	int i;
 	for(i=0;i<numObjects;i++) {
-		checkCollision(&objects[i]);
+		if(!objects[i].attached) {
+			checkCollision(&objects[i]);
+		}
 	}
 }
