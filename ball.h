@@ -12,8 +12,6 @@ class Ball {
 	float length;
 	float height;
 	GLfloat color[3];
-	GLdouble *rotation;
-	Quaternion *quat;
 	struct timeb time;
 	float speed;
 
@@ -23,6 +21,7 @@ class Ball {
 
 public:
 	float center[3];
+	GLdouble *rotation;
 
 	Ball();
 	void init();

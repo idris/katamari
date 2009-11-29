@@ -35,7 +35,6 @@ void Ball::init() {
 	dx = 0.0;
 	dy = 0.0;
 	Quaternion q(0.0, *(new Vector3D(0.0,0.0,0.0)));
-	quat = &q;
 	rotation = (GLdouble*)calloc(sizeof(GLdouble), 16);
 	getMultMatrix(&q, rotation);
 
@@ -219,8 +218,24 @@ bool Ball::checkCollision(Cube *object) {
 			object->attached = true;
 			object->offset[0] = center[0] - object->center[0];
 			object->offset[1] = center[1] - object->center[1];
-			object->quat = (Quaternion*) malloc(sizeof(quat));
-			memcpy(object->quat, quat, sizeof(quat));
+			object->offset[2] = center[2] - object->center[2];
+			object->rotation = (GLdouble*)calloc(sizeof(GLdouble), 16);
+			object->rotation[0] = rotation[0];
+			object->rotation[1] = rotation[4];
+			object->rotation[2] = rotation[8];
+			object->rotation[3] = rotation[12];
+			object->rotation[4] = rotation[1];
+			object->rotation[5] = rotation[5];
+			object->rotation[6] = rotation[9];
+			object->rotation[7] = rotation[13];
+			object->rotation[8] = rotation[2];
+			object->rotation[9] = rotation[6];
+			object->rotation[10] = rotation[10];
+			object->rotation[11] = rotation[14];
+			object->rotation[12] = rotation[3];
+			object->rotation[13] = rotation[7];
+			object->rotation[14] = rotation[11];
+			object->rotation[15] = rotation[15];
 			return true;
 		} else {
 			// bounce off
