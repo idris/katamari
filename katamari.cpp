@@ -20,6 +20,9 @@ using namespace std;
 
 GLint TIMER_DELAY = 10;
 
+bool pause_cloth = false;
+GLdouble cloth_flip[4][4];
+
 GLdouble camera_distance = 500.0;
 GLdouble camera_height_angle = 10.0;
 
@@ -63,34 +66,16 @@ void display(void) {
 
 	ball.draw();
 
-	cloth.addForce(Vec3(0.0,-1.0,0.0)*(0.5*0.5)); // add gravity each frame, pointing down
-//	cloth.windForce(Vec3(0.1,0.0,0.05)*(0.05*0.005)); // generate some wind each frame
-	cloth.timeStep(); // calculate the particle positions of the next frame
-	Vec3 center(ball.center[0] - 100, ball.center[2] - 200.0, ball.center[1] - 100);
-	cloth.ballCollision(center, 1.2 * ball.radius);
+	if(!pause_cloth) {
+		cloth.addForce(Vec3(0.0,-1.0,0.0)*(0.5*0.5)); // add gravity each frame, pointing down
+//		cloth.windForce(Vec3(0.1,0.0,0.05)*(0.05*0.005)); // generate some wind each frame
+		cloth.timeStep(); // calculate the particle positions of the next frame
+		Vec3 center(ball.center[0] - 100, ball.center[2] - 200.0, ball.center[1] - 100);
+		cloth.ballCollision(center, 1.2 * ball.radius);
+	}
 
 	glDisable(GL_CULL_FACE);
 	glPushMatrix();
-	GLdouble m[4][4];
-	m[0][0] = 1;
-	m[0][1] = 0;
-	m[0][2] = 0;
-	m[0][3] = 0;
-
-	m[1][0] = 0;
-	m[1][1] = 0;
-	m[1][2] = 1;
-	m[1][3] = 0;
-
-	m[2][0] = 0;
-	m[2][1] = 1;
-	m[2][2] = 0;
-	m[2][3] = 0;
-
-	m[3][0] = 0;
-	m[3][1] = 0;
-	m[3][2] = 0;
-	m[3][3] = 1;
 
 	glDisable(GL_LIGHTING);
 	glColor3f(0.3f, 0.1f, 0.1f);
@@ -104,7 +89,7 @@ void display(void) {
 	glEnable(GL_LIGHTING);
 
 	glTranslated(100.0, 100.0, 200.0);
-	glMultMatrixd((GLdouble *)m);
+	glMultMatrixd((GLdouble *)cloth_flip);
 
 	cloth.drawShaded();
 
@@ -150,6 +135,9 @@ void myKeyboard(unsigned char c, int x, int y) {
 			return;
 		case 'v':
 			camera_distance += 10;
+			return;
+		case 'p':
+			pause_cloth = !pause_cloth;
 			return;
 		case '-':
 		case '_':
@@ -239,6 +227,27 @@ int main(int argc, char** argv) {
 	shadowMatrix[3][3] = 1.0;
 	shadowMatrix[2][0] = (0.0-lightx) / lightz;
 	shadowMatrix[2][1] = (0.0-lighty) / lightz;
+
+	cloth_flip[0][0] = 1;
+	cloth_flip[0][1] = 0;
+	cloth_flip[0][2] = 0;
+	cloth_flip[0][3] = 0;
+	
+	cloth_flip[1][0] = 0;
+	cloth_flip[1][1] = 0;
+	cloth_flip[1][2] = 1;
+	cloth_flip[1][3] = 0;
+	
+	cloth_flip[2][0] = 0;
+	cloth_flip[2][1] = 1;
+	cloth_flip[2][2] = 0;
+	cloth_flip[2][3] = 0;
+	
+	cloth_flip[3][0] = 0;
+	cloth_flip[3][1] = 0;
+	cloth_flip[3][2] = 0;
+	cloth_flip[3][3] = 1;
+	
 
 	readObjects();
 

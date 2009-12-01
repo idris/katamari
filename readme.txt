@@ -31,6 +31,13 @@ the keyboard as follows:
 'v' - zoom in
 
 
+Other Information
+=================
+Because cloth simulation is CPU intensive, it slows down the speed of the 
+entire system. Therefore, you can press 'p' to pause the cloth simulation:
+'p' - pause the cloth
+
+
 External Resources
 ==================
 Cloth simulation was adapted from the code at this tutorial:
