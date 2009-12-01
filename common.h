@@ -2,6 +2,7 @@
 #include "ball.h"
 #include "floor.h"
 #include "sky.h"
+#include "cloth.h"
 
 extern GLfloat RED_RGB[];
 extern GLfloat GREEN_RGB[];
@@ -15,6 +16,7 @@ extern Cube *objects;
 extern Ball ball;
 extern Floor theFloor;
 extern Sky sky;
+extern Cloth cloth;
 
 extern bool leftKey;
 extern bool rightKey;

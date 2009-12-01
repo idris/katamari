@@ -5,7 +5,6 @@
 #include "Quaternion.h"
 
 class Ball {
-	float radius;
 	float dx;
 	float dy;
 	float width;
@@ -22,6 +21,7 @@ class Ball {
 public:
 	float center[3];
 	GLdouble *rotation;
+	float radius;
 
 	Ball();
 	void init();

@@ -63,6 +63,54 @@ void display(void) {
 
 	ball.draw();
 
+	cloth.addForce(Vec3(0.0,-1.0,0.0)*(0.5*0.5)); // add gravity each frame, pointing down
+//	cloth.windForce(Vec3(0.1,0.0,0.05)*(0.05*0.005)); // generate some wind each frame
+	cloth.timeStep(); // calculate the particle positions of the next frame
+	Vec3 center(ball.center[0] - 100, ball.center[2] - 200.0, ball.center[1] - 100);
+	cloth.ballCollision(center, 1.2 * ball.radius);
+
+	glDisable(GL_CULL_FACE);
+	glPushMatrix();
+	GLdouble m[4][4];
+	m[0][0] = 1;
+	m[0][1] = 0;
+	m[0][2] = 0;
+	m[0][3] = 0;
+
+	m[1][0] = 0;
+	m[1][1] = 0;
+	m[1][2] = 1;
+	m[1][3] = 0;
+
+	m[2][0] = 0;
+	m[2][1] = 1;
+	m[2][2] = 0;
+	m[2][3] = 0;
+
+	m[3][0] = 0;
+	m[3][1] = 0;
+	m[3][2] = 0;
+	m[3][3] = 1;
+
+	glDisable(GL_LIGHTING);
+	glColor3f(0.3f, 0.1f, 0.1f);
+	glEnable(GL_POLYGON_OFFSET_FILL);
+	glPolygonOffset(-1.0f, -1.0f);
+	glPushMatrix();
+	glMultMatrixd((GLdouble *)shadowMatrix);
+	cloth.drawShadow();
+	glPopMatrix();
+	glDisable(GL_POLYGON_OFFSET_FILL);
+	glEnable(GL_LIGHTING);
+
+	glTranslated(100.0, 100.0, 200.0);
+	glMultMatrixd((GLdouble *)m);
+
+	cloth.drawShaded();
+
+	glPopMatrix();
+	glEnable(GL_CULL_FACE);
+
     glutSwapBuffers();
 }
 

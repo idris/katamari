@@ -15,6 +15,7 @@
 		095302A010895F710004F90D /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0953029F10895F710004F90D /* CoreFoundation.framework */; };
 		095302A210895F710004F90D /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095302A110895F710004F90D /* IOKit.framework */; };
 		097635FB108EA875009E58C4 /* floor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 097635FA108EA875009E58C4 /* floor.cpp */; };
+		098CDC1610C49EDC0051790A /* cloth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 098CDC1510C49EDC0051790A /* cloth.cpp */; };
 		09DEB86C1097A32500A4C844 /* Quaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09DEB8661097A32500A4C844 /* Quaternion.cpp */; };
 		09DEB86D1097A32500A4C844 /* RGBpixmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09DEB8681097A32500A4C844 /* RGBpixmap.cpp */; };
 		09DEB86E1097A32500A4C844 /* Vector3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09DEB86A1097A32500A4C844 /* Vector3D.cpp */; };
@@ -48,6 +49,8 @@
 		095302A110895F710004F90D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		097635F9108EA875009E58C4 /* floor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = floor.h; sourceTree = "<group>"; };
 		097635FA108EA875009E58C4 /* floor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = floor.cpp; sourceTree = "<group>"; };
+		098CDC1510C49EDC0051790A /* cloth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cloth.cpp; sourceTree = "<group>"; };
+		098CDC3810C4A18F0051790A /* cloth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cloth.h; sourceTree = "<group>"; };
 		09DEB8661097A32500A4C844 /* Quaternion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quaternion.cpp; sourceTree = "<group>"; };
 		09DEB8671097A32500A4C844 /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
 		09DEB8681097A32500A4C844 /* RGBpixmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RGBpixmap.cpp; sourceTree = "<group>"; };
@@ -94,6 +97,8 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				098CDC3810C4A18F0051790A /* cloth.h */,
+				098CDC1510C49EDC0051790A /* cloth.cpp */,
 				09DEB8661097A32500A4C844 /* Quaternion.cpp */,
 				09DEB8671097A32500A4C844 /* Quaternion.h */,
 				09DEB8681097A32500A4C844 /* RGBpixmap.cpp */,
@@ -183,6 +188,7 @@
 				09DEB86C1097A32500A4C844 /* Quaternion.cpp in Sources */,
 				09DEB86D1097A32500A4C844 /* RGBpixmap.cpp in Sources */,
 				09DEB86E1097A32500A4C844 /* Vector3D.cpp in Sources */,
+				098CDC1610C49EDC0051790A /* cloth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

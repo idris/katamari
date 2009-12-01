@@ -11,6 +11,9 @@
 #include "cube.h"
 #include "ball.h"
 #include "floor.h"
+#include "cloth.h"
+
+
 
 GLfloat RED_RGB[] = {1.0, 0.0, 0.0};
 GLfloat GREEN_RGB[] = {0.0, 1.0, 0.0};
@@ -24,6 +27,7 @@ Cube *objects;
 Ball ball;
 Floor theFloor;
 Sky sky;
+Cloth cloth(304,200,16,12);
 
 bool leftKey = false;
 bool rightKey = false;
