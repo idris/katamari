@@ -29,3 +29,9 @@ the keyboard as follows:
 'f' - move the camera down
 'c' - zoom out
 'v' - zoom in
+
+
+External Resources
+==================
+Cloth simulation was adapted from the code at this tutorial:
+http://cg.alexandra.dk/2009/06/02/mosegaards-cloth-simulation-coding-tutorial/
