@@ -328,32 +328,16 @@ void Ball::checkCollisions() {
 	GLdouble dist_from_floor = 0;
 	for(i=0;i<numObjects;i++) {
 		if(objects[i].attached) {
-//			if(true) continue;
 			// check to see if the attached object collides with the floor
 			Cube o = objects[i];
 
-/*
-			GLdouble *oCenter;
-			oCenter = matrixTimesVector(rotation, o.offset);
-			oCenter[0] = center[0] - oCenter[0];
-			oCenter[1] = center[1] - oCenter[1];
-			oCenter[2] = center[2] - oCenter[2];
-*/
 			GLdouble *oCenter = o.getCenter();
-//			cout << "CenterZ: " << oCenter[2] << endl;
 
 			GLdouble oToFloor = oCenter[2] - o.radius;
 			free(oCenter);
-//			cout << "To Floor: " << oToFloor << endl;
-//			cout << "center: " << oCenter[0] << "\t" << oCenter[1] << "\t" << oCenter[2] << endl;
-//			cout << "baller: " << center[0] << "\t" << center[1] << "\t" << center[2] << endl;
-//			cout << "cubeer: " << o.center[0] << "\t" << o.center[1] << "\t" << o.center[2] << endl;
-//			cout << "offset: " << o.offset[0] << "\t" << o.offset[1] << "\t" << o.offset[2] << endl;
 
-//			cout << "center: " << oCenter[2] << " . " << o.offset[2] << endl;
 			if(oToFloor < 0) {
 				dist_from_floor -= oToFloor;
-//				cout << "FLOOR diff: " << diff << endl;
 			}
 		} else {
 			// check for a scollision with this object
