@@ -215,6 +215,7 @@ bool Ball::checkCollision(Cube *object) {
 
 	// check if ball collided with the object
 	collision = sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)) <= radius + objectRadius;
+	if(center[2] - radius > object->center[2] + objectRadius) collision = false;
 	if(!collision) {
 		// check if attached objects collided with the object.
 		GLdouble *oCenter;
@@ -223,7 +224,8 @@ bool Ball::checkCollision(Cube *object) {
 			if(objects[i].attached) {
 				Cube o = objects[i];
 				oCenter = o.getCenter();
-				if(sqrt((x2 - oCenter[0])*(x2 - oCenter[0]) + (y2 - oCenter[1])*(y2 - oCenter[1])) <= o.radius + objectRadius) {
+				if(sqrt((x2 - oCenter[0])*(x2 - oCenter[0]) + (y2 - oCenter[1])*(y2 - oCenter[1])) <= o.radius + objectRadius
+				   && oCenter[2] - o.radius <= object->center[2] + objectRadius) {
 //					cout << "ball: " << center[0] << "\t" << center[1] << "\t" << center[2] << " . radius: " << radius << endl;
 //					cout << "cube: " << oCenter[0] << "\t" << oCenter[1] << "\t" << oCenter[2] << " . radius: " << o.radius << endl;
 //					cout << "COLLISION" << endl;
