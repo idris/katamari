@@ -23,9 +23,6 @@ GLint TIMER_DELAY = 10;
 bool pause_cloth = false;
 GLdouble cloth_flip[4][4];
 
-GLdouble camera_distance = 500.0;
-GLdouble camera_height_angle = 10.0;
-
 GLfloat light_diffuse[] = {1.0, 0.0, 0.0, 1.0};  /* Red diffuse light. */
 GLfloat light_position[] = {1.0, -1.0, 1.0, 0.0};  /* Infinite light location. */
 
@@ -45,12 +42,13 @@ void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	xyCameraRadius = cos(camera_height_angle * M_PI/180) * camera_distance;
-	camera_height = 50.0 + ball.center[2] + sin(camera_height_angle * M_PI/180) * camera_distance;
+//	camera_height = 50.0 + ball.center[2] + sin(camera_height_angle * M_PI/180) * camera_distance;
+	camera_height = 50.0 + ball.radius + sin(camera_height_angle * M_PI/180) * camera_distance;
 
 	// camera stuff
 	glLoadIdentity();
-	gluLookAt(ball.center[0] + sin(camera_angle * M_PI/180) * xyCameraRadius, ball.center[1] - cos(camera_angle * M_PI/180) * xyCameraRadius, camera_height, ball.center[0], ball.center[1], ball.center[2], 0.0, 0.0, 1.0);
-//	gluLookAt(ball.center[0], -2.0, camera_height, ball.center[0], ball.center[1], ball.center[2], 0.0, 0.0, 1.0);
+//	gluLookAt(ball.center[0] + sin(camera_angle * M_PI/180) * xyCameraRadius, ball.center[1] - cos(camera_angle * M_PI/180) * xyCameraRadius, camera_height, ball.center[0], ball.center[1], ball.center[2], 0.0, 0.0, 1.0);
+	gluLookAt(ball.center[0] + sin(camera_angle * M_PI/180) * xyCameraRadius, ball.center[1] - cos(camera_angle * M_PI/180) * xyCameraRadius, camera_height, ball.center[0], ball.center[1], ball.radius, 0.0, 0.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 //	gluPerspective(<#GLdouble fovy#>, <#GLdouble aspect#>, <#GLdouble zNear#>, <#GLdouble zFar#>)

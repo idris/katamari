@@ -28,6 +28,7 @@ public:
 	Cube();
 	void read(ifstream *inFile);
 	void draw();
+	GLdouble* getCenter();
 };
 
 #endif

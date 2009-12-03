@@ -22,6 +22,7 @@ public:
 	float center[3];
 	GLdouble *rotation;
 	float radius;
+	float size;
 
 	Ball();
 	void init();

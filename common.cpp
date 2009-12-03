@@ -27,7 +27,10 @@ Cube *objects;
 Ball ball;
 Floor theFloor;
 Sky sky;
-Cloth cloth(304,200,16,12);
+Cloth cloth(304,200,14,10);
+
+GLdouble camera_distance = 500.0;
+GLdouble camera_height_angle = 10.0;
 
 bool leftKey = false;
 bool rightKey = false;
@@ -69,4 +72,38 @@ void multiplyMatrices(GLdouble *m1, GLdouble *m2, GLdouble *m) {
 			}
 		}
 	}
+}
+
+// adapted from http://labprograms.wordpress.com/2009/07/22/matrix-vector-multiplication-using-friend-function/
+GLdouble* matrixTimesVector(GLdouble *m1, GLdouble *v1) {
+	GLdouble *m = (GLdouble*)calloc(sizeof(GLdouble), 16);
+	GLdouble *ans = (GLdouble*)calloc(sizeof(GLdouble), 3);
+	int i, j;
+
+	m[0] = m1[0];
+	m[4] = m1[1];
+	m[8] = m1[2];
+	m[12] = m1[3];
+	m[1] = m1[4];
+	m[5] = m1[5];
+	m[9] = m1[6];
+	m[13] = m1[7];
+	m[2] = m1[8];
+	m[6] = m1[9];
+	m[10] = m1[10];
+	m[14] = m1[11];
+	m[3] = m1[12];
+	m[7] = m1[13];
+	m[11] = m1[14];
+	m[15] = m1[15];
+
+//	cout<<"\nThe resultant matrix...\n";
+	for(i=0;i<3;i++)
+	{
+		ans[i]=0;
+		for(j=0;j<3;j++)
+			ans[i] += m[(i*4)+j] * v1[j];
+//		cout<<ans[i]<<"\t";
+	}
+	return ans;
 }

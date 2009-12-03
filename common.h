@@ -18,6 +18,9 @@ extern Floor theFloor;
 extern Sky sky;
 extern Cloth cloth;
 
+extern GLdouble camera_distance;
+extern GLdouble camera_height_angle;
+
 extern bool leftKey;
 extern bool rightKey;
 extern bool upKey;
@@ -31,3 +34,5 @@ extern GLdouble camera_angle;
 void getMultMatrix(Quaternion *q, GLdouble *m);
 
 void multiplyMatrices(GLdouble *m1, GLdouble *m2, GLdouble *m);
+
+GLdouble* matrixTimesVector(GLdouble *m1, GLdouble *v1);

@@ -40,7 +40,7 @@ void Ball::init() {
 
 	speed = 1;
 
-	radius = 50.0;
+	size = radius = 50.0;
 	width = radius * 2;
 	length = radius * 2;
 	height = radius * 2;
@@ -211,14 +211,49 @@ bool Ball::checkCollision(Cube *object) {
 	double v[2];
 	double v2[2];
 
-	if(sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)) <= radius + objectRadius) {
+	bool collision = false;
+
+	// check if ball collided with the object
+	collision = sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)) <= radius + objectRadius;
+	if(!collision) {
+		// check if attached objects collided with the object.
+		GLdouble *oCenter;
+		int i;
+		for(i=0;i<numObjects;i++) {
+			if(objects[i].attached) {
+				Cube o = objects[i];
+				oCenter = o.getCenter();
+				if(sqrt((x2 - oCenter[0])*(x2 - oCenter[0]) + (y2 - oCenter[1])*(y2 - oCenter[1])) <= o.radius + objectRadius) {
+//					cout << "ball: " << center[0] << "\t" << center[1] << "\t" << center[2] << " . radius: " << radius << endl;
+//					cout << "cube: " << oCenter[0] << "\t" << oCenter[1] << "\t" << oCenter[2] << " . radius: " << o.radius << endl;
+//					cout << "COLLISION" << endl;
+					collision = true;
+					x1 = oCenter[0];
+					y1 = oCenter[1];
+					free(oCenter);
+					break;
+				}
+				free(oCenter);
+			}
+		}
+	}
+
+
+	if(collision) {
 		// collision detected!
-		if(objectRadius < radius) {
+		if(objectRadius < size) {
+			GLdouble *off;
+			GLdouble offset[3];
+
 			// attach object
 			object->attached = true;
-			object->offset[0] = center[0] - object->center[0];
-			object->offset[1] = center[1] - object->center[1];
-			object->offset[2] = center[2] - object->center[2];
+
+			size += radius * object->radius / size;
+
+			offset[0] = center[0] - object->center[0];
+			offset[1] = center[1] - object->center[1];
+			offset[2] = center[2] - object->center[2];
+
 			object->rotation = (GLdouble*)calloc(sizeof(GLdouble), 16);
 			object->rotation[0] = rotation[0];
 			object->rotation[1] = rotation[4];
@@ -236,12 +271,19 @@ bool Ball::checkCollision(Cube *object) {
 			object->rotation[13] = rotation[7];
 			object->rotation[14] = rotation[11];
 			object->rotation[15] = rotation[15];
+
+			off = matrixTimesVector(object->rotation, offset);
+
+			object->offset[0] = off[0];
+			object->offset[1] = off[1];
+			object->offset[2] = off[2];
+
 			return true;
 		} else {
 			// bounce off
 			normal[0] = x1 - x2;
 			normal[1] = y1 - y2;
-			
+
 			double l = sqrt(normal[0]*normal[0] + normal[1]*normal[1]);
 			
 			normal[0] /= l;
@@ -281,9 +323,41 @@ bool Ball::checkCollision(Cube *object) {
 
 void Ball::checkCollisions() {
 	int i;
+	GLdouble dist_from_floor = 0;
 	for(i=0;i<numObjects;i++) {
-		if(!objects[i].attached) {
+		if(objects[i].attached) {
+//			if(true) continue;
+			// check to see if the attached object collides with the floor
+			Cube o = objects[i];
+
+/*
+			GLdouble *oCenter;
+			oCenter = matrixTimesVector(rotation, o.offset);
+			oCenter[0] = center[0] - oCenter[0];
+			oCenter[1] = center[1] - oCenter[1];
+			oCenter[2] = center[2] - oCenter[2];
+*/
+			GLdouble *oCenter = o.getCenter();
+//			cout << "CenterZ: " << oCenter[2] << endl;
+
+			GLdouble oToFloor = oCenter[2] - o.radius;
+			free(oCenter);
+//			cout << "To Floor: " << oToFloor << endl;
+//			cout << "center: " << oCenter[0] << "\t" << oCenter[1] << "\t" << oCenter[2] << endl;
+//			cout << "baller: " << center[0] << "\t" << center[1] << "\t" << center[2] << endl;
+//			cout << "cubeer: " << o.center[0] << "\t" << o.center[1] << "\t" << o.center[2] << endl;
+//			cout << "offset: " << o.offset[0] << "\t" << o.offset[1] << "\t" << o.offset[2] << endl;
+
+//			cout << "center: " << oCenter[2] << " . " << o.offset[2] << endl;
+			if(oToFloor < 0) {
+				dist_from_floor -= oToFloor;
+//				cout << "FLOOR diff: " << diff << endl;
+			}
+		} else {
+			// check for a scollision with this object
 			checkCollision(&objects[i]);
 		}
+
+		center[2] = dist_from_floor + radius;
 	}
 }

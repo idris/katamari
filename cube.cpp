@@ -35,8 +35,9 @@ void Cube::read(ifstream *inFile) {
 void Cube::draw() {
 	if(attached) {
 		// update my location based on the ball
-		center[0] = ball.center[0] - offset[0];
-		center[1] = ball.center[1] - offset[1];
+//		center[0] = ball.center[0] - offset[0];
+//		center[1] = ball.center[1] - offset[1];
+//		center[2] = ball.center[2] - offset[2];
 		// we may want to preserve center, and instead put these as translates when we _draw
 	}
 
@@ -53,7 +54,7 @@ void Cube::draw() {
 
 	glDisable(GL_POLYGON_OFFSET_FILL);
 	glEnable(GL_LIGHTING);
-	
+
 	// draw the object
 	glColor3fv(color);
 	_draw();
@@ -61,13 +62,15 @@ void Cube::draw() {
 
 void Cube::_draw() {
 	glPushMatrix();
-	glTranslated(center[0], center[1], center[2]);
+	if(!attached) {
+		glTranslated(center[0], center[1], center[2]);
+	}
 
 	if(attached) {
-		glTranslated(offset[0], offset[1], offset[2]);
+		glTranslated(ball.center[0], ball.center[1], ball.center[2]);
 		glMultMatrixd(ball.rotation);
+		glTranslated(-offset[0], -offset[1], -offset[2]);
 		glMultMatrixd(rotation);
-		glTranslated(0.0-offset[0], 0.0-offset[1], 0.0 - offset[2]);
 	}
 
 	glRotated(angle, 0.0, 0.0, 1.0);
@@ -129,4 +132,13 @@ void Cube::_draw() {
 	glEnd();
 
 	glPopMatrix();
+}
+
+GLdouble* Cube::getCenter() {
+	GLdouble *oCenter = matrixTimesVector(ball.rotation, offset);
+	oCenter[0] = ball.center[0] - oCenter[0];
+	oCenter[1] = ball.center[1] - oCenter[1];
+	oCenter[2] = ball.center[2] - oCenter[2];
+
+	return oCenter;
 }
