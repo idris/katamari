@@ -226,9 +226,6 @@ bool Ball::checkCollision(Cube *object) {
 				oCenter = o.getCenter();
 				if(sqrt((x2 - oCenter[0])*(x2 - oCenter[0]) + (y2 - oCenter[1])*(y2 - oCenter[1])) <= o.radius + objectRadius
 				   && oCenter[2] - o.radius <= object->center[2] + objectRadius) {
-//					cout << "ball: " << center[0] << "\t" << center[1] << "\t" << center[2] << " . radius: " << radius << endl;
-//					cout << "cube: " << oCenter[0] << "\t" << oCenter[1] << "\t" << oCenter[2] << " . radius: " << o.radius << endl;
-//					cout << "COLLISION" << endl;
 					collision = true;
 					x1 = oCenter[0];
 					y1 = oCenter[1];
@@ -313,8 +310,6 @@ bool Ball::checkCollision(Cube *object) {
 				dy = -oldDy;
 				center[0] += 5.0 * dx;
 				center[1] += 5.0 * dy;
-				//			x1 = center[0];
-				//			y1 = center[1];
 			}
 			return true;
 		}

@@ -33,14 +33,6 @@ void Cube::read(ifstream *inFile) {
 }
 
 void Cube::draw() {
-	if(attached) {
-		// update my location based on the ball
-//		center[0] = ball.center[0] - offset[0];
-//		center[1] = ball.center[1] - offset[1];
-//		center[2] = ball.center[2] - offset[2];
-		// we may want to preserve center, and instead put these as translates when we _draw
-	}
-
 	// draw the shadow
 	glDisable(GL_LIGHTING);
 	glColor3f(0.3f, 0.1f, 0.1f);
